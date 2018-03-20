@@ -38,7 +38,6 @@ public class XmlAdaptedPerson {
     private String link;
     @XmlElement(required = true)
     private String detail;
-
     @XmlElement
     private List<XmlAdaptedGroup> grouped = new ArrayList<>();
 
