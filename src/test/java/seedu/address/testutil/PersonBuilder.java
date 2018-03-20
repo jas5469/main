@@ -68,7 +68,7 @@ public class PersonBuilder {
     /**
      * Parses the {@code groups} into a {@code Set<Group>} and set it to the {@code Person} that we are building.
      */
-    public PersonBuilder withGroups(String ...groups) {
+    public PersonBuilder withGroups(String ... groups) {
         this.groups = SampleDataUtil.getGroupSet(groups);
         return this;
     }
