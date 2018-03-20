@@ -2,9 +2,10 @@ package seedu.address.model;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_GROUP_CS2010;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_GROUP_CS1010;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_GROUP_COLOR_RED;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_GROUP_CS1010;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_GROUP_CS2010;
+
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
