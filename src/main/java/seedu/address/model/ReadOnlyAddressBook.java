@@ -4,6 +4,8 @@ import javafx.collections.ObservableList;
 import seedu.address.model.group.Group;
 import seedu.address.model.person.Person;
 
+import seedu.address.model.todo.ToDo;
+
 /**
  * Unmodifiable view of an address book
  */
@@ -20,5 +22,11 @@ public interface ReadOnlyAddressBook {
      * This list will not contain any duplicate groups.
      */
     ObservableList<Group> getGroupList();
+
+    /**
+     * Returns an unmodifiable view of the todos list.
+     * This list will not contain any duplicate todos.
+     */
+    ObservableList<ToDo> getToDoList();
 
 }

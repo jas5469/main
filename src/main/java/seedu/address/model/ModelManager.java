@@ -17,7 +17,8 @@ import seedu.address.model.group.GroupNotFoundException;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
-
+import seedu.address.model.todo.ToDo;
+import seedu.address.model.todo.exceptions.DuplicateToDoException;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -75,9 +76,15 @@ public class ModelManager extends ComponentManager implements Model {
         indicateAddressBookChanged();
     }
 
+    public synchronized void addToDo(ToDo todo) throws DuplicateToDoException {
+        addressBook.addToDo(todo);
+        indicateAddressBookChanged();
+    }
+
     @Override
     public void updateGroup(Group target, Group editedGroup) throws GroupNotFoundException {
         addressBook.editGroups(target, editedGroup);
+
         indicateAddressBookChanged();
     }
 

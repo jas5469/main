@@ -6,6 +6,7 @@ import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.AMY;
 import static seedu.address.testutil.TypicalPersons.BOB;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalToDos.TODO_A;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -21,6 +22,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.person.Person;
 import seedu.address.model.group.Group;
+import seedu.address.model.todo.ToDo;
 import seedu.address.testutil.AddressBookBuilder;
 import seedu.address.testutil.PersonBuilder;
 
@@ -36,6 +38,7 @@ public class AddressBookTest {
     public void constructor() {
         assertEquals(Collections.emptyList(), addressBook.getPersonList());
         assertEquals(Collections.emptyList(), addressBook.getGroupList());
+        assertEquals(Collections.emptyList(), addressBook.getToDoList());
     }
 
     @Test
@@ -56,7 +59,20 @@ public class AddressBookTest {
         // Repeat ALICE twice
         List<Person> newPersons = Arrays.asList(ALICE, ALICE);
         List<Group> newGroups = new ArrayList<>(ALICE.getGroups());
-        AddressBookStub newData = new AddressBookStub(newPersons, newGroups);
+        List<ToDo> newToDos = Arrays.asList(TODO_A);
+        AddressBookStub newData = new AddressBookStub(newPersons, newGroups, newToDos);
+
+        thrown.expect(AssertionError.class);
+        addressBook.resetData(newData);
+    }
+
+    @Test
+    public void resetData_withDuplicateToDos_throwsAssertionError() {
+        // Repeat TODO_A twice
+        List<Person> newPersons = Arrays.asList(ALICE);
+        List<Group> newGroups = new ArrayList<>(ALICE.getGroups());
+        List<ToDo> newToDos = Arrays.asList(TODO_A, TODO_A);
+        AddressBookStub newData = new AddressBookStub(newPersons, newGroups, newToDos);
 
         thrown.expect(AssertionError.class);
         addressBook.resetData(newData);
@@ -72,6 +88,12 @@ public class AddressBookTest {
     public void getGroupList_modifyList_throwsUnsupportedOperationException() {
         thrown.expect(UnsupportedOperationException.class);
         addressBook.getGroupList().remove(0);
+    }
+
+    @Test
+    public void getToDoList_modifyList_throwsUnsupportedOperationException() {
+        thrown.expect(UnsupportedOperationException.class);
+        addressBook.getToDoList().remove(0);
     }
 
     @Test
@@ -101,10 +123,13 @@ public class AddressBookTest {
     private static class AddressBookStub implements ReadOnlyAddressBook {
         private final ObservableList<Person> persons = FXCollections.observableArrayList();
         private final ObservableList<Group> groups = FXCollections.observableArrayList();
+        private final ObservableList<ToDo> todos = FXCollections.observableArrayList();
 
-        AddressBookStub(Collection<Person> persons, Collection<? extends Group> groups) {
+        AddressBookStub(Collection<Person> persons, Collection<? extends Groups> groups, Collection<ToDo> todos) {
             this.persons.setAll(persons);
-            this.groups.setAll(groups);
+            this.tags.setAll(groups);
+            this.todos.setAll(todos);
+
         }
 
         @Override
@@ -115,6 +140,11 @@ public class AddressBookTest {
         @Override
         public ObservableList<Group> getGroupList() {
             return groups;
+        }
+
+        @Override
+        public ObservableList<ToDo> getToDoList() {
+            return todos;
         }
     }
 
