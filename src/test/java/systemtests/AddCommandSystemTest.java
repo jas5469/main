@@ -175,10 +175,10 @@ public class AddCommandSystemTest extends AddressBookSystemTest {
         assertCommandFailure(command, AddCommand.MESSAGE_DUPLICATE_PERSON);
 
         /* Case: add a duplicate person except with different groups -> rejected */
-        // "friends" is an existing group used in the default model, see TypicalPersons#ALICE
+        // "CS1010" is an existing group used in the default model, see TypicalPersons#ALICE
         // This test will fail if a new group that is not in the model is used, see the bug documented in
         // AddressBook#addPerson(Person)
-        command = PersonUtil.getAddCommand(HOON) + " " + PREFIX_GROUP.getPrefix() + "friends";
+        command = PersonUtil.getAddCommand(HOON) + " " + PREFIX_GROUP.getPrefix() + "CS1010";
         assertCommandFailure(command, AddCommand.MESSAGE_DUPLICATE_PERSON);
 
         /* Case: missing name -> rejected */

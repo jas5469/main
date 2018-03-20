@@ -54,23 +54,17 @@ public class GuiTestAssert {
      */
     private static String getGroupColorStyleFor(String groupName) {
         switch (groupName) {
-        case "classmates":
-        case "owesMoney":
+        case "CS3230":
             return "teal";
 
-        case "colleagues":
-        case "neighbours":
-            return "yellow";
-
-        case "family":
-        case "friend":
+        case "CS1010":
+        case "GEQ1000":
             return "orange";
 
-        case "friends":
+        case "CS2010":
+        case "GER1000":
             return "brown";
 
-        case "husband":
-            return "grey";
 
         default:
             fail(groupName + " does not have a color assigned.");

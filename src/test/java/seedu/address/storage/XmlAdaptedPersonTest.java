@@ -162,7 +162,7 @@ public class XmlAdaptedPersonTest {
     public void xmlAdaptedGroupEqual() {
         XmlAdaptedGroup group1 = new XmlAdaptedGroup("CS1010");
         XmlAdaptedGroup group2 = new XmlAdaptedGroup("CS1010");
-        Group group3 = new Group("friends");
+        Group group3 = new Group("CS1010");
         XmlAdaptedGroup group4 = new XmlAdaptedGroup("CS2010");
 
         assertEquals(group1, group2);
