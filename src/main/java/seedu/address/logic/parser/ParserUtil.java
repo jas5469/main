@@ -17,12 +17,7 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.TimeTableLink;
-<<<<<<< HEAD
-
-=======
-import seedu.address.model.tag.Tag;
 import seedu.address.model.todo.Content;
->>>>>>> 68bb5e35a434c3f77b8d012a36ac30e08d4215b5
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
