@@ -1,9 +1,7 @@
 package seedu.address.model;
 
 import static org.junit.Assert.assertEquals;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_UNUSED;
+import static seedu.address.logic.commands.CommandTestUtil.*;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.AMY;
 import static seedu.address.testutil.TypicalPersons.BOB;
@@ -22,7 +20,7 @@ import org.junit.rules.ExpectedException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.person.Person;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.group.Group;
 import seedu.address.testutil.AddressBookBuilder;
 import seedu.address.testutil.PersonBuilder;
 
@@ -37,7 +35,7 @@ public class AddressBookTest {
     @Test
     public void constructor() {
         assertEquals(Collections.emptyList(), addressBook.getPersonList());
-        assertEquals(Collections.emptyList(), addressBook.getTagList());
+        assertEquals(Collections.emptyList(), addressBook.getGroupList());
     }
 
     @Test
@@ -57,8 +55,8 @@ public class AddressBookTest {
     public void resetData_withDuplicatePersons_throwsAssertionError() {
         // Repeat ALICE twice
         List<Person> newPersons = Arrays.asList(ALICE, ALICE);
-        List<Tag> newTags = new ArrayList<>(ALICE.getTags());
-        AddressBookStub newData = new AddressBookStub(newPersons, newTags);
+        List<Group> newGroups = new ArrayList<>(ALICE.getGroups());
+        AddressBookStub newData = new AddressBookStub(newPersons, newGroups);
 
         thrown.expect(AssertionError.class);
         addressBook.resetData(newData);
@@ -71,14 +69,14 @@ public class AddressBookTest {
     }
 
     @Test
-    public void getTagList_modifyList_throwsUnsupportedOperationException() {
+    public void getGroupList_modifyList_throwsUnsupportedOperationException() {
         thrown.expect(UnsupportedOperationException.class);
-        addressBook.getTagList().remove(0);
+        addressBook.getGroupList().remove(0);
     }
 
     @Test
-    public void removeTag_removeNonexistentTag_addressBookUnchanged() throws Exception {
-        amyNBobAddressBook.removeTag(new Tag(VALID_TAG_UNUSED));
+    public void removeGroup_removeNonexistentGroup_addressBookUnchanged() throws Exception {
+        amyNBobAddressBook.removeGroup(new Group(VALID_GROUP_UNUSED));
 
         AddressBook expectedAddressBook = new AddressBookBuilder().withPerson(AMY).withPerson(BOB).build();
 
@@ -86,11 +84,11 @@ public class AddressBookTest {
     }
 
     @Test
-    public void removeTag_tagUsedByMultiplePersons_tagRemoved() throws Exception {
-        amyNBobAddressBook.removeTag(new Tag(VALID_TAG_FRIEND));
+    public void removeGroup_groupUsedByMultiplePersons_groupRemoved() throws Exception {
+        amyNBobAddressBook.removeGroup(new Group(VALID_GROUP_CS1010));
 
-        Person expectedAmy = new PersonBuilder(AMY).withTags().build();
-        Person expectedBob = new PersonBuilder(BOB).withTags(VALID_TAG_HUSBAND).build();
+        Person expectedAmy = new PersonBuilder(AMY).withGroups().build();
+        Person expectedBob = new PersonBuilder(BOB).withGroups(VALID_GROUP_CS2010).build();
         AddressBook expectedAddressBook = new AddressBookBuilder()
                 .withPerson(expectedAmy).withPerson(expectedBob).build();
 
@@ -98,15 +96,15 @@ public class AddressBookTest {
     }
 
     /**
-     * A stub ReadOnlyAddressBook whose persons and tags lists can violate interface constraints.
+     * A stub ReadOnlyAddressBook whose persons and groups lists can violate interface constraints.
      */
     private static class AddressBookStub implements ReadOnlyAddressBook {
         private final ObservableList<Person> persons = FXCollections.observableArrayList();
-        private final ObservableList<Tag> tags = FXCollections.observableArrayList();
+        private final ObservableList<Group> groups = FXCollections.observableArrayList();
 
-        AddressBookStub(Collection<Person> persons, Collection<? extends Tag> tags) {
+        AddressBookStub(Collection<Person> persons, Collection<? extends Group> groups) {
             this.persons.setAll(persons);
-            this.tags.setAll(tags);
+            this.groups.setAll(groups);
         }
 
         @Override
@@ -115,8 +113,8 @@ public class AddressBookTest {
         }
 
         @Override
-        public ObservableList<Tag> getTagList() {
-            return tags;
+        public ObservableList<Group> getGroupList() {
+            return groups;
         }
     }
 

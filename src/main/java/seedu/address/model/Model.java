@@ -3,11 +3,12 @@ package seedu.address.model;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
+import seedu.address.model.group.GroupNotFoundException;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
-import seedu.address.model.tag.Tag;
-import seedu.address.model.tag.TagNotFoundException;
+import seedu.address.model.group.Group;
+import seedu.address.model.group.GroupNotFoundException;
 
 /**
  * The API of the Model component.
@@ -28,11 +29,11 @@ public interface Model {
     /** Adds the given person */
     void addPerson(Person person) throws DuplicatePersonException;
 
-    /** Changes the color of a tag */
-    public void updateTag(Tag target, Tag editedTag) throws TagNotFoundException;
+    /** Changes the color of a group */
+    public void updateGroup(Group target, Group editedGroup) throws GroupNotFoundException;
 
-    /** Removes the given tag from addressbook and all persons */
-    void removeTag(Tag tag);
+    /** Removes the given group from addressbook and all persons */
+    void removeGroup(Group group);
 
     /**
      * Replaces the given person {@code target} with {@code editedPerson}.

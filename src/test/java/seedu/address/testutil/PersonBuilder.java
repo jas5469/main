@@ -10,7 +10,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.TimeTableLink;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.group.Group;
 import seedu.address.model.util.SampleDataUtil;
 
 /**
@@ -24,7 +24,7 @@ public class PersonBuilder {
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
     public static final String DEFAULT_TIMETABLE_LINK = "http://modsn.us/MYwiD";
     public static final String DEFAULT_DETAIL = "Likes tennis";
-    public static final String DEFAULT_TAGS = "friends";
+    public static final String DEFAULT_GROUPS = "CS1010";
 
     private Name name;
     private Phone phone;
@@ -32,7 +32,7 @@ public class PersonBuilder {
     private Address address;
     private TimeTableLink link;
     private Detail detail;
-    private Set<Tag> tags;
+    private Set<Group> groups;
 
     public PersonBuilder() {
         name = new Name(DEFAULT_NAME);
@@ -41,7 +41,7 @@ public class PersonBuilder {
         address = new Address(DEFAULT_ADDRESS);
         link = new TimeTableLink(DEFAULT_TIMETABLE_LINK);
         detail = new Detail(DEFAULT_DETAIL);
-        tags = SampleDataUtil.getTagSet(DEFAULT_TAGS);
+        groups = SampleDataUtil.getGroupSet(DEFAULT_GROUPS);
     }
 
     /**
@@ -54,7 +54,7 @@ public class PersonBuilder {
         address = personToCopy.getAddress();
         link = personToCopy.getTimeTableLink();
         detail = personToCopy.getDetail();
-        tags = new HashSet<>(personToCopy.getTags());
+        groups = new HashSet<>(personToCopy.getGroups());
     }
 
     /**
@@ -66,10 +66,10 @@ public class PersonBuilder {
     }
 
     /**
-     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Person} that we are building.
+     * Parses the {@code groups} into a {@code Set<Group>} and set it to the {@code Person} that we are building.
      */
-    public PersonBuilder withTags(String ... tags) {
-        this.tags = SampleDataUtil.getTagSet(tags);
+    public PersonBuilder withGroups(String ...groups) {
+        this.groups = SampleDataUtil.getGroupSet(groups);
         return this;
     }
 
@@ -114,7 +114,7 @@ public class PersonBuilder {
     }
 
     public Person build() {
-        return new Person(name, phone, email, address, link, detail, tags);
+        return new Person(name, phone, email, address, link, detail, groups);
     }
 
 }

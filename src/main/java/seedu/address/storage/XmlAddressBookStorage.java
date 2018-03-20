@@ -17,7 +17,7 @@ import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.FileUtil;
 import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.group.Group;
 
 /**
  * A class to access AddressBook data stored as an xml file on the hard disk.
@@ -116,25 +116,25 @@ public class XmlAddressBookStorage implements AddressBookStorage {
         FileUtil.createIfMissing(file);
         XmlFileStorage.saveDataToFile(file, new XmlSerializableAddressBook(addressBook));
 
-        saveTagColors(addressBook);
+        saveGroupColors(addressBook);
     }
 
     /**
-     * Save the tags and their specified colors from {@code addressBook}
+     * Save the groups and their specified colors from {@code addressBook}
      */
-    private void saveTagColors(ReadOnlyAddressBook addressBook) throws IOException {
-        File oldFile = new File(Tag.TAG_COLOR_FILE_PATH);
+    private void saveGroupColors(ReadOnlyAddressBook addressBook) throws IOException {
+        File oldFile = new File(Group.GROUP_COLOR_FILE_PATH);
         oldFile.delete();
-        File newFile = new File(Tag.TAG_COLOR_FILE_PATH);
+        File newFile = new File(Group.GROUP_COLOR_FILE_PATH);
         PrintWriter writer = null;
         try {
-            writer = new PrintWriter(Tag.TAG_COLOR_FILE_PATH, "UTF-8");
-            List<Tag> tags = addressBook.getTagList();
-            for (Tag tag : tags) {
-                writer.write(tag.name + ":" + tag.color + "\n");
+            writer = new PrintWriter(Group.GROUP_COLOR_FILE_PATH, "UTF-8");
+            List<Group> groups = addressBook.getGroupList();
+            for (Group group : groups) {
+                writer.write(group.name + ":" + group.color + "\n");
             }
         } catch (FileNotFoundException fnfe) {
-            throw new AssertionError("Tag color file not found. This should never happen.\n");
+            throw new AssertionError("Group color file not found. This should never happen.\n");
         } catch (UnsupportedEncodingException uee) {
             throw new AssertionError("UTF-8 encoding not supported.\n");
         }

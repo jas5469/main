@@ -16,7 +16,7 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.TimeTableLink;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.group.Group;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -190,31 +190,31 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String tag} into a {@code Tag}.
+     * Parses a {@code String group} into a {@code Group}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws IllegalValueException if the given {@code tag} is invalid.
+     * @throws IllegalValueException if the given {@code group} is invalid.
      */
-    public static Tag parseTag(String tag) throws IllegalValueException {
-        requireNonNull(tag);
-        String trimmedTag = tag.trim();
-        if (!Tag.isValidTagName(trimmedTag)) {
-            throw new IllegalValueException(Tag.MESSAGE_TAG_CONSTRAINTS);
+    public static Group parseGroup(String group) throws IllegalValueException {
+        requireNonNull(group);
+        String trimmedGroupName = group.trim();
+        if (!Group.isValidGroupName(trimmedGroupName)) {
+            throw new IllegalValueException(Group.MESSAGE_GROUP_CONSTRAINTS);
         }
-        return new Tag(trimmedTag);
+        return new Group(trimmedGroupName);
     }
 
 
     /**
-     * Parses {@code Collection<String> tags} into a {@code Set<Tag>}.
+     * Parses {@code Collection<String> groups} into a {@code Set<Group>}.
      */
-    public static Set<Tag> parseTags(Collection<String> tags) throws IllegalValueException {
-        requireNonNull(tags);
-        final Set<Tag> tagSet = new HashSet<>();
-        for (String tagName : tags) {
-            tagSet.add(parseTag(tagName));
+    public static Set<Group> parseGroups(Collection<String> groups) throws IllegalValueException {
+        requireNonNull(groups);
+        final Set<Group> groupSet = new HashSet<>();
+        for (String groupName : groups) {
+            groupSet.add(parseGroup(groupName));
         }
-        return tagSet;
+        return groupSet;
     }
 
     /**
@@ -225,10 +225,10 @@ public class ParserUtil {
      */
     public static String parseColor(String color) throws IllegalValueException {
         requireNonNull(color);
-        if (Tag.isValidTagColor(color)) {
+        if (Group.isValidGroupColor(color)) {
             return color;
         } else {
-            throw new IllegalValueException(Tag.MESSAGE_TAG_COLOR_CONSTRAINTS);
+            throw new IllegalValueException(Group.MESSAGE_GROUP_COLOR_CONSTRAINTS);
         }
     }
 }

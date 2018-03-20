@@ -13,11 +13,11 @@ import seedu.address.model.person.Person;
 public class PersonCard extends UiPart<Region> {
 
     private static final String FXML = "PersonListCard.fxml";
-    private static final String[] TAG_COLOR_STYLES =
+    private static final String[] GROUP_COLOR_STYLES =
         {"teal", "red", "yellow", "blue", "orange", "brown", "green", "pink", "black", "grey"};
 
     /**
-     * Define tag colour styles
+     * Define group colour styles
      */
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -42,7 +42,7 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label email;
     @FXML
-    private FlowPane tags;
+    private FlowPane groups;
 
     public PersonCard(Person person, int displayedIndex) {
         super(FXML);
@@ -52,30 +52,30 @@ public class PersonCard extends UiPart<Region> {
         phone.setText(person.getPhone().value);
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
-        initTags(person);
+        initGroups(person);
     }
 
     /**
      * Returns the color style for {@code name}'s label.
      */
-    private String getTagColorStyleFor(String tagName) {
-        // use the hash code of the tag name to generate a random color, so that the color remain consistent
-        // between different runs of the program while still making it random enough between tags.
-        return TAG_COLOR_STYLES[Math.abs(tagName.hashCode()) % TAG_COLOR_STYLES.length];
+    private String getGroupColorStyleFor(String groupName) {
+        // use the hash code of the group name to generate a random color, so that the color remain consistent
+        // between different runs of the program while still making it random enough between groups.
+        return GROUP_COLOR_STYLES[Math.abs(groupName.hashCode()) % GROUP_COLOR_STYLES.length];
     }
 
     /**
-     * Creates the tag labels for {@code person}.
+     * Creates the group labels for {@code person}.
      */
-    private void initTags(Person person) {
-        person.getTags().forEach(tag -> {
-            Label tagLabel = new Label(tag.name);
-            if (tag.color.equals("undefined")) {
-                tagLabel.getStyleClass().add(getTagColorStyleFor(tag.name));
+    private void initGroups(Person person) {
+        person.getGroups().forEach(group -> {
+            Label groupLabel = new Label(group.name);
+            if (group.color.equals("undefined")) {
+                groupLabel.getStyleClass().add(getGroupColorStyleFor(group.name));
             } else {
-                tagLabel.getStyleClass().add(tag.color);
+                groupLabel.getStyleClass().add(group.color);
             }
-            tags.getChildren().add(tagLabel);
+            groups.getChildren().add(groupLabel);
         });
     }
 

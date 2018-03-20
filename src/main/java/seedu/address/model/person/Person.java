@@ -6,8 +6,8 @@ import java.util.Collections;
 import java.util.Objects;
 import java.util.Set;
 
-import seedu.address.model.tag.Tag;
-import seedu.address.model.tag.UniqueTagList;
+import seedu.address.model.group.Group;
+import seedu.address.model.group.UniqueGroupList;
 
 /**
  * Represents a Person in the address book.
@@ -21,23 +21,22 @@ public class Person {
     private final Address address;
     private final TimeTableLink link;
     private final Detail detail;
-
-    private final UniqueTagList tags;
+    private final UniqueGroupList groups;
 
     /**
      * Every field must be present and not null.
      */
     public Person(Name name, Phone phone, Email email, Address address, TimeTableLink link, Detail detail,
-                  Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, link, detail, tags);
+                  Set<Group> groups) {
+        requireAllNonNull(name, phone, email, address, link, detail, groups);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.link = link;
         this.detail = detail;
-        // protect internal tags from changes in the arg list
-        this.tags = new UniqueTagList(tags);
+        // protect internal groups from changes in the arg list
+        this.groups = new UniqueGroupList(groups);
     }
 
     public Name getName() {
@@ -65,11 +64,11 @@ public class Person {
     }
 
     /**
-     * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
+     * Returns an immutable group set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
-    public Set<Tag> getTags() {
-        return Collections.unmodifiableSet(tags.toSet());
+    public Set<Group> getGroups() {
+        return Collections.unmodifiableSet(groups.toSet());
     }
 
     @Override
@@ -94,7 +93,7 @@ public class Person {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, link, detail, tags);
+        return Objects.hash(name, phone, email, address, link, detail, groups);
     }
 
     @Override
@@ -111,8 +110,8 @@ public class Person {
                 .append(getTimeTableLink())
                 .append(" Detail: ")
                 .append(getDetail())
-                .append(" Tags: ");
-        getTags().forEach(builder::append);
+                .append(" Group: ");
+        getGroups().forEach(builder::append);
         return builder.toString();
     }
 

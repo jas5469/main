@@ -14,13 +14,13 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import javafx.collections.ObservableList;
+import seedu.address.model.group.UniqueGroupList;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
-import seedu.address.model.tag.Tag;
-import seedu.address.model.tag.TagNotFoundException;
-import seedu.address.model.tag.UniqueTagList;
+import seedu.address.model.group.Group;
+import seedu.address.model.group.GroupNotFoundException;
 
 /**
  * Wraps all data at the address-book level
@@ -29,7 +29,7 @@ import seedu.address.model.tag.UniqueTagList;
 public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniquePersonList persons;
-    private final UniqueTagList tags;
+    private final UniqueGroupList groups;
 
     /*
      * The 'unusual' code block below is an non-static initialization block, sometimes used to avoid duplication
@@ -40,14 +40,14 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     {
         persons = new UniquePersonList();
-        tags = new UniqueTagList();
+        groups = new UniqueGroupList();
     }
 
     public AddressBook() {
     }
 
     /**
-     * Creates an AddressBook using the Persons and Tags in the {@code toBeCopied}
+     * Creates an AddressBook using the Persons and Groups in the {@code toBeCopied}
      */
     public AddressBook(ReadOnlyAddressBook toBeCopied) {
         this();
@@ -60,8 +60,8 @@ public class AddressBook implements ReadOnlyAddressBook {
         this.persons.setPersons(persons);
     }
 
-    public void setTags(Set<Tag> tags) {
-        this.tags.setTags(tags);
+    public void setGroups(Set<Group> groups) {
+        this.groups.setGroups(groups);
     }
 
     /**
@@ -69,9 +69,9 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void resetData(ReadOnlyAddressBook newData) {
         requireNonNull(newData);
-        setTags(new HashSet<>(newData.getTagList()));
+        setGroups(new HashSet<>(newData.getGroupList()));
         List<Person> syncedPersonList = newData.getPersonList().stream()
-                .map(this::syncWithMasterTagList)
+                .map(this::syncWithMasterGroupList)
                 .collect(Collectors.toList());
 
         try {
@@ -85,60 +85,60 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     /**
      * Adds a person to the address book.
-     * Also checks the new person's tags and updates {@link #tags} with any new tags found,
-     * and updates the Tag objects in the person to point to those in {@link #tags}.
+     * Also checks the new person's groupss and updates {@link #groups} with any new Groups found,
+     * and updates the Group objects in the person to point to those in {@link #groups}.
      *
      * @throws DuplicatePersonException if an equivalent person already exists.
      */
     public void addPerson(Person p) throws DuplicatePersonException {
-        Person person = syncWithMasterTagList(p);
-        // TODO: the tags master list will be updated even though the below line fails.
-        // This can cause the tags master list to have additional tags that are not tagged to any person
+        Person person = syncWithMasterGroupList(p);
+        // TODO: the Groups master list will be updated even though the below line fails.
+        // This can cause the Groups master list to have additional Groups that are not grouped to any person
         // in the person list.
         persons.add(person);
     }
 
     /**
      * Replaces the given person {@code target} in the list with {@code editedPerson}.
-     * {@code AddressBook}'s tag list will be updated with the tags of {@code editedPerson}.
+     * {@code AddressBook}'s group list will be updated with the Groups of {@code editedPerson}.
      *
      * @throws DuplicatePersonException if updating the person's details causes the person to be equivalent to
      *                                  another existing person in the list.
      * @throws PersonNotFoundException  if {@code target} could not be found in the list.
-     * @see #syncWithMasterTagList(Person)
+     * @see #syncWithMasterGroupList(Person)
      */
     public void updatePerson(Person target, Person editedPerson)
             throws DuplicatePersonException, PersonNotFoundException {
         requireNonNull(editedPerson);
 
-        Person syncedEditedPerson = syncWithMasterTagList(editedPerson);
-        // TODO: the tags master list will be updated even though the below line fails.
-        // This can cause the tags master list to have additional tags that are not tagged to any person
+        Person syncedEditedPerson = syncWithMasterGroupList(editedPerson);
+        // TODO: the Groups master list will be updated even though the below line fails.
+        // This can cause the Groups master list to have additional Groups that are not Grouped to any person
         // in the person list.
         persons.setPerson(target, syncedEditedPerson);
     }
 
     /**
-     * Updates the master tag list to include tags in {@code person} that are not in the list.
+     * Updates the master group list to include Groups in {@code person} that are not in the list.
      *
-     * @return a copy of this {@code person} such that every tag in this person points to a Tag object in the master
+     * @return a copy of this {@code person} such that every group in this person points to a Group object in the master
      * list.
      */
-    private Person syncWithMasterTagList(Person person) {
-        final UniqueTagList personTags = new UniqueTagList(person.getTags());
-        tags.mergeFrom(personTags);
+    private Person syncWithMasterGroupList(Person person) {
+        final UniqueGroupList personGroups = new UniqueGroupList(person.getGroups());
+        groups.mergeFrom(personGroups);
 
-        // Create map with values = tag object references in the master list
-        // used for checking person tag references
-        final Map<Tag, Tag> masterTagObjects = new HashMap<>();
-        tags.forEach(tag -> masterTagObjects.put(tag, tag));
+        // Create map with values = group object references in the master list
+        // used for checking person group references
+        final Map<Group, Group> masterGroupObjects = new HashMap<>();
+        groups.forEach(Group -> masterGroupObjects.put(Group, Group));
 
-        // Rebuild the list of person tags to point to the relevant tags in the master tag list.
-        final Set<Tag> correctTagReferences = new HashSet<>();
-        personTags.forEach(tag -> correctTagReferences.add(masterTagObjects.get(tag)));
+        // Rebuild the list of person Groups to point to the relevant Groups in the master group list.
+        final Set<Group> correctGroupReferences = new HashSet<>();
+        personGroups.forEach(Group -> correctGroupReferences.add(masterGroupObjects.get(Group)));
         return new Person(
                 person.getName(), person.getPhone(), person.getEmail(), person.getAddress(), person.getTimeTableLink(),
-                person.getDetail(), correctTagReferences);
+                person.getDetail(), correctGroupReferences);
     }
 
     /**
@@ -154,17 +154,17 @@ public class AddressBook implements ReadOnlyAddressBook {
         }
     }
 
-    //// tag-level operations
+    //// group-level operations
 
-    public void addTag(Tag t) throws UniqueTagList.DuplicateTagException {
-        tags.add(t);
+    public void addGroup(Group t) throws UniqueGroupList.DuplicateGroupException {
+        groups.add(t);
     }
 
     //// util methods
 
     @Override
     public String toString() {
-        return persons.asObservableList().size() + " persons, " + tags.asObservableList().size() + " tags";
+        return persons.asObservableList().size() + " persons, " + groups.asObservableList().size() + " Groups";
         // TODO: refine later
     }
 
@@ -174,8 +174,8 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     @Override
-    public ObservableList<Tag> getTagList() {
-        return tags.asObservableList();
+    public ObservableList<Group> getGroupList() {
+        return groups.asObservableList();
     }
 
     @Override
@@ -183,136 +183,136 @@ public class AddressBook implements ReadOnlyAddressBook {
         return other == this // short circuit if same object
                 || (other instanceof AddressBook // instanceof handles nulls
                 && this.persons.equals(((AddressBook) other).persons)
-                && this.tags.equalsOrderInsensitive(((AddressBook) other).tags));
+                && this.groups.equalsOrderInsensitive(((AddressBook) other).groups));
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(persons, tags);
+        return Objects.hash(persons, groups);
     }
 
     /**
-     * Removes {@code tag} from all {@code persons} in the {@code AddressBook} and from the {@code AddressBook}.
+     * Removes {@code group} from all {@code persons} in the {@code AddressBook} and from the {@code AddressBook}.
      */
-    public void removeTag(Tag tag) {
+    public void removeGroup(Group group) {
         try {
             for (Person person : persons) {
-                removeTagFromPerson(tag, person);
+                removeGroupFromPerson(group, person);
             }
         } catch (PersonNotFoundException pnfe) {
             throw new AssertionError("Impossible: original person is not found from the address book.");
         }
 
-        removeTagFromAddressBook(tag);
+        removeGroupFromAddressBook(group);
 
     }
 
     /**
-     * Removes {@code tag} from the {@code AddressBook}.
+     * Removes {@code group} from the {@code AddressBook}.
      */
-    private void removeTagFromAddressBook(Tag tag) {
-        Set<Tag> editedTagList = tags.toSet();
-        if (editedTagList.contains(tag)) {
-            editedTagList.remove(tag);
-            tags.setTags(editedTagList);
+    private void removeGroupFromAddressBook(Group group) {
+        Set<Group> editedGroupList = groups.toSet();
+        if (editedGroupList.contains(group)) {
+            editedGroupList.remove(group);
+            groups.setGroups(editedGroupList);
         }
     }
 
     /**
-     * Replaces the old {@code target} tag with the new {@code editedTag}
+     * Replaces the old {@code target} group with the new {@code editedGroup}
      */
-    public void editTag(Tag target, Tag editedTag) throws TagNotFoundException {
-        Set<Tag> editedTagList = tags.toSet();
-        if (editedTagList.contains(target)) {
-            editedTagList.remove(target);
-            editedTagList.add(editedTag);
-            tags.setTags(editedTagList);
+    public void editGroups(Group target, Group editedGroup) throws GroupNotFoundException {
+        Set<Group> editedGroupList = groups.toSet();
+        if (editedGroupList.contains(target)) {
+            editedGroupList.remove(target);
+            editedGroupList.add(editedGroup);
+            groups.setGroups(editedGroupList);
         } else {
-            throw new TagNotFoundException();
+            throw new GroupNotFoundException();
         }
         for (Person p : persons) {
-            replaceTagInPerson(target, editedTag, p);
+            replaceGroupInPerson(target, editedGroup, p);
         }
     }
 
     /**
-     * Replaces the old {@code target} tag of a {@code person} with the new {@code editedTag}
+     * Replaces the old {@code target} group of a {@code person} with the new {@code editedGroup}
      */
-    private void replaceTagInPerson(Tag target, Tag editedTag, Person person) {
-        Set<Tag> tagList = new HashSet<>(person.getTags());
+    private void replaceGroupInPerson(Group target, Group editedGroup, Person person) {
+        Set<Group> groupList = new HashSet<>(person.getGroups());
 
-        //Terminate if tag is not is tagList
-        if (!tagList.remove(target)) {
+        //Terminate if group is not is groupList
+        if (!groupList.remove(target)) {
             return;
         }
-        tagList.add(editedTag);
+        groupList.add(editedGroup);
         Person updatedPerson = new Person(person.getName(), person.getPhone(),
-                person.getEmail(), person.getAddress(), person.getTimeTableLink(), person.getDetail(), tagList);
+                person.getEmail(), person.getAddress(), person.getTimeTableLink(), person.getDetail(), groupList);
 
         try {
             updatePerson(person, updatedPerson);
         } catch (DuplicatePersonException dpe) {
-            throw new AssertionError("Modifying a person's tags only should not result in a duplicate. "
+            throw new AssertionError("Modifying a person's groups only should not result in a duplicate. "
                     + "See Person#equals(Object).");
         } catch (PersonNotFoundException pnfe) {
-            throw new AssertionError("Modifying a person's tags only should not result in "
+            throw new AssertionError("Modifying a person's groups only should not result in "
                     + "a PersonNotFoundException. See Person#equals(Object).");
         }
     }
 
     /**
-     * Removes {@code tag} from all {@code persons} in the {@code AddressBook}.
+     * Removes {@code group} from all {@code persons} in the {@code AddressBook}.
      */
-    private void removeTagFromPerson(Tag tag, Person person) throws PersonNotFoundException {
-        Set<Tag> tagList = new HashSet<>(person.getTags());
+    private void removeGroupFromPerson(Group group, Person person) throws PersonNotFoundException {
+        Set<Group> groupList = new HashSet<>(person.getGroups());
 
-        //Terminate if tag is not is tagList
-        if (!tagList.remove(tag)) {
+        //Terminate if group is not is groupList
+        if (!groupList.remove(group)) {
             return;
         }
         Person updatedPerson = new Person(person.getName(), person.getPhone(),
-                person.getEmail(), person.getAddress(), person.getTimeTableLink(), person.getDetail(), tagList);
+                person.getEmail(), person.getAddress(), person.getTimeTableLink(), person.getDetail(), groupList);
 
         try {
             updatePerson(person, updatedPerson);
         } catch (DuplicatePersonException dpe) {
-            throw new AssertionError("Modifying a person's tags only should not result in a duplicate. "
+            throw new AssertionError("Modifying a person's groups only should not result in a duplicate. "
                     + "See Person#equals(Object).");
         }
     }
 
     /**
-     * Add all the user-specified colors from saved file to the tags in the address book
+     * Add all the user-specified colors from saved file to the Groups in the address book
      */
-    public void addColorsToTag() {
-        HashMap<String, String> tagColors = readTagColorFile();
-        HashSet<Tag> coloredTags = new HashSet<Tag>();
-        for (Tag tag : tags) {
-            if (tagColors.containsKey(tag.name)) {
-                coloredTags.add(new Tag(tag.name, tagColors.get(tag.name)));
+    public void addColorsToGroup() {
+        HashMap<String, String> groupColors = readGroupColorFile();
+        HashSet<Group> coloredGroups = new HashSet<Group>();
+        for (Group group : groups) {
+            if (groupColors.containsKey(group.name)) {
+                coloredGroups.add(new Group(group.name, groupColors.get(group.name)));
             } else {
-                coloredTags.add(new Tag(tag.name));
+                coloredGroups.add(new Group(group.name));
             }
         }
-        tags.setTags(coloredTags);
+        groups.setGroups(coloredGroups);
     }
 
     /**
-     * Read the saved file to map the tags to the color that the user specified
+     * Read the saved file to map the Groups to the color that the user specified
      */
-    private HashMap<String, String> readTagColorFile() {
-        String tagColorsFilePath = Tag.TAG_COLOR_FILE_PATH;
-        HashMap<String, String> tagColors = new HashMap<String, String>();
+    private HashMap<String, String> readGroupColorFile() {
+        String groupColorsFilePath = Group.GROUP_COLOR_FILE_PATH;
+        HashMap<String, String> groupColors = new HashMap<String, String>();
         try {
-            Scanner scan = new Scanner(new File(tagColorsFilePath));
+            Scanner scan = new Scanner(new File(groupColorsFilePath));
             while (scan.hasNextLine()) {
                 String[] t = scan.nextLine().split(":");
-                tagColors.put(t[0], t[1]);
+                groupColors.put(t[0], t[1]);
             }
-            return tagColors;
+            return groupColors;
         } catch (FileNotFoundException fnfe) {
-            throw new AssertionError("Tag color file not found. Using default settings.");
+            throw new AssertionError("Group color file not found. Using default settings.");
         }
     }
 }

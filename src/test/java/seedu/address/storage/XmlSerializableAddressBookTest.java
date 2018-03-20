@@ -19,7 +19,7 @@ public class XmlSerializableAddressBookTest {
     private static final String TEST_DATA_FOLDER = FileUtil.getPath("src/test/data/XmlSerializableAddressBookTest/");
     private static final File TYPICAL_PERSONS_FILE = new File(TEST_DATA_FOLDER + "typicalPersonsAddressBook.xml");
     private static final File INVALID_PERSON_FILE = new File(TEST_DATA_FOLDER + "invalidPersonAddressBook.xml");
-    private static final File INVALID_TAG_FILE = new File(TEST_DATA_FOLDER + "invalidTagAddressBook.xml");
+    private static final File INVALID_GROUP_FILE = new File(TEST_DATA_FOLDER + "invalidGroupAddressBook.xml");
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
@@ -42,8 +42,8 @@ public class XmlSerializableAddressBookTest {
     }
 
     @Test
-    public void toModelType_invalidTagFile_throwsIllegalValueException() throws Exception {
-        XmlSerializableAddressBook dataFromFile = XmlUtil.getDataFromFile(INVALID_TAG_FILE,
+    public void toModelType_invalidGroupFile_throwsIllegalValueException() throws Exception {
+        XmlSerializableAddressBook dataFromFile = XmlUtil.getDataFromFile(INVALID_GROUP_FILE,
                 XmlSerializableAddressBook.class);
         thrown.expect(IllegalValueException.class);
         dataFromFile.toModelType();
