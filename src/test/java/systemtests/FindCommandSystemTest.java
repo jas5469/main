@@ -127,7 +127,7 @@ public class FindCommandSystemTest extends AddressBookSystemTest {
         assertSelectedCardUnchanged();
 
         /* Case: find groups of person in address book -> 0 persons found */
-        List<Group> groups = new ArrayList<>(DANIEL.getTags());
+        List<Group> groups = new ArrayList<>(DANIEL.getGroups());
         command = FindCommand.COMMAND_WORD + " " + groups.get(0).name;
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
