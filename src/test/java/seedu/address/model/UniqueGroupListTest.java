@@ -2,9 +2,10 @@ package seedu.address.model;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_GROUP_COLOR_RED;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_GROUP_COLOR_ORANGE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_GROUP_CS1010;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_GROUP_CS2010;
+
 
 import org.junit.Rule;
 import org.junit.Test;
@@ -30,8 +31,8 @@ public class UniqueGroupListTest {
         UniqueGroupList uniqueGroupList2 = new UniqueGroupList();
         assertEquals(uniqueGroupList1, uniqueGroupList2);
 
-        uniqueGroupList1.add(new Group(VALID_GROUP_COLOR_RED));
-        uniqueGroupList2.add(new Group(VALID_GROUP_COLOR_RED));
+        uniqueGroupList1.add(new Group(VALID_GROUP_COLOR_ORANGE));
+        uniqueGroupList2.add(new Group(VALID_GROUP_COLOR_ORANGE));
         assertEquals(uniqueGroupList1, uniqueGroupList2);
 
         uniqueGroupList1.add(new Group(VALID_GROUP_CS1010));
@@ -45,11 +46,11 @@ public class UniqueGroupListTest {
     public void equals_differentList_false() throws Exception {
         UniqueGroupList uniqueGroupList1 = new UniqueGroupList();
         UniqueGroupList uniqueGroupList2 = new UniqueGroupList();
-        uniqueGroupList2.add(new Group(VALID_GROUP_COLOR_RED));
+        uniqueGroupList2.add(new Group(VALID_GROUP_COLOR_ORANGE));
         assertNotEquals(uniqueGroupList1, uniqueGroupList2);
 
         uniqueGroupList1.add(new Group(VALID_GROUP_CS1010));
-        uniqueGroupList1.add(new Group(VALID_GROUP_COLOR_RED));
+        uniqueGroupList1.add(new Group(VALID_GROUP_COLOR_ORANGE));
         uniqueGroupList2.add(new Group(VALID_GROUP_CS1010));
         assertNotEquals(uniqueGroupList1, uniqueGroupList2);
     }
@@ -60,8 +61,8 @@ public class UniqueGroupListTest {
         UniqueGroupList uniqueGroupList2 = new UniqueGroupList();
         assertEquals(uniqueGroupList1.hashCode(), uniqueGroupList2.hashCode());
 
-        uniqueGroupList1.add(new Group(VALID_GROUP_COLOR_RED));
-        uniqueGroupList2.add(new Group(VALID_GROUP_COLOR_RED));
+        uniqueGroupList1.add(new Group(VALID_GROUP_COLOR_ORANGE));
+        uniqueGroupList2.add(new Group(VALID_GROUP_COLOR_ORANGE));
         assertEquals(uniqueGroupList1, uniqueGroupList2);
 
         uniqueGroupList1.add(new Group(VALID_GROUP_CS1010));
@@ -75,11 +76,11 @@ public class UniqueGroupListTest {
     public void hashCode_differentList_differentResult() throws Exception {
         UniqueGroupList uniqueGroupList1 = new UniqueGroupList();
         UniqueGroupList uniqueGroupList2 = new UniqueGroupList();
-        uniqueGroupList2.add(new Group(VALID_GROUP_COLOR_RED));
+        uniqueGroupList2.add(new Group(VALID_GROUP_COLOR_ORANGE));
         assertNotEquals(uniqueGroupList1.hashCode(), uniqueGroupList2.hashCode());
 
         uniqueGroupList1.add(new Group(VALID_GROUP_CS1010));
-        uniqueGroupList1.add(new Group(VALID_GROUP_COLOR_RED));
+        uniqueGroupList1.add(new Group(VALID_GROUP_COLOR_ORANGE));
         uniqueGroupList2.add(new Group(VALID_GROUP_CS1010));
         assertNotEquals(uniqueGroupList1.hashCode(), uniqueGroupList2.hashCode());
     }

@@ -1,6 +1,6 @@
 package seedu.address.logic.commands;
 
-import static seedu.address.logic.commands.CommandTestUtil.VALID_GROUP_COLOR_RED;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_GROUP_COLOR_ORANGE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_GROUP_CS1010;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_GROUP_CS2010;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
@@ -29,15 +29,15 @@ public class ChangeGroupColorCommandTest {
     @Test
     public void execute_correctFields_success() throws Exception {
         Person editedPerson = new PersonBuilder().build();
-        ChangeGroupColorCommand command = prepareCommand(VALID_GROUP_CS1010, VALID_GROUP_COLOR_RED);
+        ChangeGroupColorCommand command = prepareCommand(VALID_GROUP_CS1010, VALID_GROUP_COLOR_ORANGE);
 
         String expectedMessage =
                 String.format(ChangeGroupColorCommand.MESSAGE_EDIT_GROUP_SUCCESS, VALID_GROUP_CS1010,
-                        VALID_GROUP_COLOR_RED);
+                        VALID_GROUP_COLOR_ORANGE);
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         Group oldGroup = new Group(VALID_GROUP_CS1010);
-        Group newGroup = new Group(VALID_GROUP_CS1010, VALID_GROUP_COLOR_RED);
+        Group newGroup = new Group(VALID_GROUP_CS1010, VALID_GROUP_COLOR_ORANGE);
         expectedModel.updateGroup(oldGroup, newGroup);
 
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -46,7 +46,7 @@ public class ChangeGroupColorCommandTest {
     @Test
     public void execute_groupNameNotInList_failure() throws Exception {
         Person editedPerson = new PersonBuilder().build();
-        ChangeGroupColorCommand command = prepareCommand(VALID_GROUP_CS2010, VALID_GROUP_COLOR_RED);
+        ChangeGroupColorCommand command = prepareCommand(VALID_GROUP_CS2010, VALID_GROUP_COLOR_ORANGE);
 
         assertCommandFailure(command, model, ChangeGroupColorCommand.MESSAGE_GROUP_NOT_IN_LIST);
     }

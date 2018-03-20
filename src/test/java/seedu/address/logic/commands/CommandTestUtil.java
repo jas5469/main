@@ -45,7 +45,7 @@ public class CommandTestUtil {
     public static final String VALID_DETAIL_BOB = "Likes girl";
     public static final String VALID_GROUP_CS2010 = "CS2010";
     public static final String VALID_GROUP_CS1010 = "CS1010";
-    public static final String VALID_GROUP_COLOR_RED = "red";
+    public static final String VALID_GROUP_COLOR_ORANGE = "orange";
     public static final String VALID_GROUP_UNUSED = "UNUSED"; //for testing only, do not use to build person
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;

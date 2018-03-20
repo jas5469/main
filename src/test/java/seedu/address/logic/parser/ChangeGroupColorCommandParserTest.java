@@ -3,7 +3,7 @@ package seedu.address.logic.parser;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_GROUP_COLOR;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_GROUP_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_GROUP_COLOR_RED;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_GROUP_COLOR_ORANGE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_GROUP_CS1010;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUP;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
@@ -41,14 +41,14 @@ public class ChangeGroupColorCommandParserTest {
                 Group.MESSAGE_GROUP_COLOR_CONSTRAINTS);
 
         // invalid group name
-        assertParseFailure(parser, INVALID_GROUP_DESC + " " + VALID_GROUP_COLOR_RED,
+        assertParseFailure(parser, INVALID_GROUP_DESC + " " + VALID_GROUP_COLOR_ORANGE,
                 Group.MESSAGE_GROUP_CONSTRAINTS);
     }
 
     @Test
     public void parse_validValue_success() {
         // unsupported color specified
-        assertParseSuccess(parser, VALID_GROUP_CS1010 + " " + VALID_GROUP_COLOR_RED,
-                new ChangeGroupColorCommand(VALID_GROUP_CS1010, VALID_GROUP_COLOR_RED));
+        assertParseSuccess(parser, VALID_GROUP_CS1010 + " " + VALID_GROUP_COLOR_ORANGE,
+                new ChangeGroupColorCommand(VALID_GROUP_CS1010, VALID_GROUP_COLOR_ORANGE));
     }
 }
