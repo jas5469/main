@@ -12,14 +12,14 @@ import static seedu.address.logic.commands.CommandTestUtil.INVALID_DETAIL_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_GROUP_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_TIMETABLE_LINK_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
-import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
+import static seedu.address.logic.commands.CommandTestUtil.GROUP_DESC_CS1010;
+import static seedu.address.logic.commands.CommandTestUtil.GROUP_DESC_CS2010;
 import static seedu.address.logic.commands.CommandTestUtil.TIMETABLE_LINK_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.TIMETABLE_LINK_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_AMY;
@@ -32,7 +32,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_GROUP_CS1010;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TIMETABLE_LINK_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TIMETABLE_LINK_BOB;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUP;
@@ -72,13 +72,13 @@ public class AddCommandSystemTest extends AddressBookSystemTest {
 
         /* ------------------------ Perform add operations on the shown unfiltered list ----------------------------- */
 
-        /* Case: add a person without tags to a non-empty address book, command with leading spaces and trailing spaces
+        /* Case: add a person without groups to a non-empty address book, command with leading spaces and trailing spaces
          * -> added
          */
         Person toAdd = AMY;
         String command = "   " + AddCommand.COMMAND_WORD + "  " + NAME_DESC_AMY + "  " + PHONE_DESC_AMY + " "
                 + EMAIL_DESC_AMY + "   " + ADDRESS_DESC_AMY + "   " + TIMETABLE_LINK_DESC_AMY + " " + DETAIL_DESC_AMY
-                + " " + TAG_DESC_FRIEND + " ";
+                + " " + GROUP_DESC_CS1010 + " ";
         assertCommandSuccess(command, toAdd);
 
         /* Case: undo adding Amy to the list -> Amy deleted */
@@ -95,64 +95,64 @@ public class AddCommandSystemTest extends AddressBookSystemTest {
         /* Case: add a person with all fields same as another person in the address book except name -> added */
         toAdd = new PersonBuilder().withName(VALID_NAME_BOB).withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY)
                 .withAddress(VALID_ADDRESS_AMY).withTimeTableLink(VALID_TIMETABLE_LINK_AMY).withDetail(VALID_DETAIL_AMY)
-                .withTags(VALID_TAG_FRIEND).build();
+                .withGroups(VALID_GROUP_CS1010).build();
         command = AddCommand.COMMAND_WORD + NAME_DESC_BOB + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY
-                + TIMETABLE_LINK_DESC_AMY + DETAIL_DESC_AMY + TAG_DESC_FRIEND;
+                + TIMETABLE_LINK_DESC_AMY + DETAIL_DESC_AMY + GROUP_DESC_CS1010;
         assertCommandSuccess(command, toAdd);
 
         /* Case: add a person with all fields same as another person in the address book except phone -> added */
         toAdd = new PersonBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_AMY)
                 .withAddress(VALID_ADDRESS_AMY).withTimeTableLink(VALID_TIMETABLE_LINK_AMY).withDetail(VALID_DETAIL_AMY)
-                .withTags(VALID_TAG_FRIEND).build();
+                .withGroups(VALID_GROUP_CS1010).build();
         command = AddCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_BOB + EMAIL_DESC_AMY + ADDRESS_DESC_AMY
-                + TIMETABLE_LINK_DESC_AMY + DETAIL_DESC_AMY + TAG_DESC_FRIEND;
+                + TIMETABLE_LINK_DESC_AMY + DETAIL_DESC_AMY + GROUP_DESC_CS1010;
         assertCommandSuccess(command, toAdd);
 
         /* Case: add a person with all fields same as another person in the address book except email -> added */
         toAdd = new PersonBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_BOB)
                 .withAddress(VALID_ADDRESS_AMY).withTimeTableLink(VALID_TIMETABLE_LINK_AMY).withDetail(VALID_DETAIL_AMY)
-                .withTags(VALID_TAG_FRIEND).build();
+                .withGroups(VALID_GROUP_CS1010).build();
         command = AddCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_BOB + ADDRESS_DESC_AMY
-                + TIMETABLE_LINK_DESC_AMY + DETAIL_DESC_AMY + TAG_DESC_FRIEND;
+                + TIMETABLE_LINK_DESC_AMY + DETAIL_DESC_AMY + GROUP_DESC_CS1010;
         assertCommandSuccess(command, toAdd);
 
         /* Case: add a person with all fields same as another person in the address book except address -> added */
         toAdd = new PersonBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY)
                 .withAddress(VALID_ADDRESS_BOB).withTimeTableLink(VALID_TIMETABLE_LINK_AMY).withDetail(VALID_DETAIL_AMY)
-                .withTags(VALID_TAG_FRIEND).build();
+                .withGroups(VALID_GROUP_CS1010).build();
         command = AddCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_BOB
-                + TIMETABLE_LINK_DESC_AMY + DETAIL_DESC_AMY + TAG_DESC_FRIEND;
+                + TIMETABLE_LINK_DESC_AMY + DETAIL_DESC_AMY + GROUP_DESC_CS1010;
         assertCommandSuccess(command, toAdd);
 
         /* Case: add a person with all fields same as another person in the address book
         except Timetable link -> added */
         toAdd = new PersonBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY)
                 .withAddress(VALID_ADDRESS_AMY).withTimeTableLink(VALID_TIMETABLE_LINK_BOB).withDetail(VALID_DETAIL_AMY)
-                .withTags(VALID_TAG_FRIEND).build();
+                .withGroups(VALID_GROUP_CS1010).build();
         command = AddCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY
-                + TIMETABLE_LINK_DESC_BOB + DETAIL_DESC_AMY + TAG_DESC_FRIEND;
+                + TIMETABLE_LINK_DESC_BOB + DETAIL_DESC_AMY + GROUP_DESC_CS1010;
         assertCommandSuccess(command, toAdd);
 
         /* Case: add a person with all fields same as another person in the address book
         except Detail -> added */
         toAdd = new PersonBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY)
                 .withAddress(VALID_ADDRESS_AMY).withTimeTableLink(VALID_TIMETABLE_LINK_AMY).withDetail(VALID_DETAIL_BOB)
-                .withTags(VALID_TAG_FRIEND).build();
+                .withGroups(VALID_GROUP_CS1010).build();
         command = AddCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY
-                + TIMETABLE_LINK_DESC_AMY + DETAIL_DESC_BOB + TAG_DESC_FRIEND;
+                + TIMETABLE_LINK_DESC_AMY + DETAIL_DESC_BOB + GROUP_DESC_CS1010;
         assertCommandSuccess(command, toAdd);
 
         /* Case: add to empty address book -> added */
         deleteAllPersons();
         assertCommandSuccess(ALICE);
 
-        /* Case: add a person with tags, command with parameters in random order -> added */
+        /* Case: add a person with groups, command with parameters in random order -> added */
         toAdd = BOB;
-        command = AddCommand.COMMAND_WORD + TAG_DESC_FRIEND + PHONE_DESC_BOB + ADDRESS_DESC_BOB + NAME_DESC_BOB
-                + TIMETABLE_LINK_DESC_BOB + DETAIL_DESC_BOB + TAG_DESC_HUSBAND + EMAIL_DESC_BOB;
+        command = AddCommand.COMMAND_WORD + GROUP_DESC_CS1010 + PHONE_DESC_BOB + ADDRESS_DESC_BOB + NAME_DESC_BOB
+                + TIMETABLE_LINK_DESC_BOB + DETAIL_DESC_BOB + GROUP_DESC_CS2010 + EMAIL_DESC_BOB;
         assertCommandSuccess(command, toAdd);
 
-        /* Case: add a person, missing tags -> added */
+        /* Case: add a person, missing groups -> added */
         assertCommandSuccess(HOON);
 
         /* -------------------------- Perform add operation on the shown filtered list ------------------------------ */
@@ -173,7 +173,7 @@ public class AddCommandSystemTest extends AddressBookSystemTest {
         command = PersonUtil.getAddCommand(HOON);
         assertCommandFailure(command, AddCommand.MESSAGE_DUPLICATE_PERSON);
 
-        /* Case: add a duplicate person except with different tags -> rejected */
+        /* Case: add a duplicate person except with different groups -> rejected */
         // "friends" is an existing group used in the default model, see TypicalPersons#ALICE
         // This test will fail if a new group that is not in the model is used, see the bug documented in
         // AddressBook#addPerson(Person)
@@ -233,7 +233,7 @@ public class AddCommandSystemTest extends AddressBookSystemTest {
         /* Case: invalid group -> rejected */
         command = AddCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY
                 + ADDRESS_DESC_AMY + TIMETABLE_LINK_DESC_AMY + DETAIL_DESC_AMY
-                + INVALID_TAG_DESC;
+                + INVALID_GROUP_DESC;
         assertCommandFailure(command, Group.MESSAGE_GROUP_CONSTRAINTS);
     }
 
