@@ -9,7 +9,7 @@
         <address>123, Jurong West Ave 6, #08-111</address>
         <link>http://modsn.us/MYwiD</link>
         <detail>Likes tennis</detail>
-        <tagged>CS1010</tagged>
+        <grouped>CS1010</grouped>
     </persons>
     <persons>
         <name>Benson Meier</name>
@@ -18,8 +18,8 @@
         <address>311, Clementi Ave 2, #02-25</address>
         <link>http://modsn.us/gka24</link>
         <detail>Likes tennis</detail>
-        <tagged>GEQ1000</tagged>
-        <tagged>CS1010</tagged>
+        <grouped>GEQ1000</grouped>
+        <grouped>CS1010</grouped>
     </persons>
     <persons>
         <name>Carl Kurz</name>
