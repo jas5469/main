@@ -8,7 +8,7 @@ import seedu.address.model.group.Group;
 /**
  * JAXB-friendly adapted version of the Group.
  */
-public class  XmlAdaptedGroup{
+public class XmlAdaptedGroup {
 
     @XmlValue
     private String groupName;
