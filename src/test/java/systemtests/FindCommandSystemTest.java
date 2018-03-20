@@ -19,7 +19,7 @@ import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.model.Model;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.group.Group;
 
 public class FindCommandSystemTest extends AddressBookSystemTest {
 
@@ -126,9 +126,9 @@ public class FindCommandSystemTest extends AddressBookSystemTest {
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 
-        /* Case: find tags of person in address book -> 0 persons found */
-        List<Tag> tags = new ArrayList<>(DANIEL.getTags());
-        command = FindCommand.COMMAND_WORD + " " + tags.get(0).name;
+        /* Case: find groups of person in address book -> 0 persons found */
+        List<Group> groups = new ArrayList<>(DANIEL.getTags());
+        command = FindCommand.COMMAND_WORD + " " + groups.get(0).name;
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 

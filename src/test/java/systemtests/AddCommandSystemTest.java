@@ -35,7 +35,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TIMETABLE_LINK_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TIMETABLE_LINK_BOB;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUP;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.AMY;
 import static seedu.address.testutil.TypicalPersons.BOB;
@@ -60,7 +60,7 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.TimeTableLink;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.group.Group;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
 
@@ -174,10 +174,10 @@ public class AddCommandSystemTest extends AddressBookSystemTest {
         assertCommandFailure(command, AddCommand.MESSAGE_DUPLICATE_PERSON);
 
         /* Case: add a duplicate person except with different tags -> rejected */
-        // "friends" is an existing tag used in the default model, see TypicalPersons#ALICE
-        // This test will fail if a new tag that is not in the model is used, see the bug documented in
+        // "friends" is an existing group used in the default model, see TypicalPersons#ALICE
+        // This test will fail if a new group that is not in the model is used, see the bug documented in
         // AddressBook#addPerson(Person)
-        command = PersonUtil.getAddCommand(HOON) + " " + PREFIX_TAG.getPrefix() + "friends";
+        command = PersonUtil.getAddCommand(HOON) + " " + PREFIX_GROUP.getPrefix() + "friends";
         assertCommandFailure(command, AddCommand.MESSAGE_DUPLICATE_PERSON);
 
         /* Case: missing name -> rejected */
@@ -230,11 +230,11 @@ public class AddCommandSystemTest extends AddressBookSystemTest {
                 + ADDRESS_DESC_AMY + TIMETABLE_LINK_DESC_AMY + INVALID_DETAIL_DESC;
         assertCommandFailure(command, Detail.MESSAGE_DETAIL_CONSTRAINTS);
 
-        /* Case: invalid tag -> rejected */
+        /* Case: invalid group -> rejected */
         command = AddCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY
                 + ADDRESS_DESC_AMY + TIMETABLE_LINK_DESC_AMY + DETAIL_DESC_AMY
                 + INVALID_TAG_DESC;
-        assertCommandFailure(command, Tag.MESSAGE_TAG_CONSTRAINTS);
+        assertCommandFailure(command, Group.MESSAGE_GROUP_CONSTRAINTS);
     }
 
     /**

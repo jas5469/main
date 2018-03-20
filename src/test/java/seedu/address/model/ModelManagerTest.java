@@ -3,9 +3,7 @@ package seedu.address.model;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_UNUSED;
+import static seedu.address.logic.commands.CommandTestUtil.*;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.AMY;
@@ -20,7 +18,7 @@ import org.junit.rules.ExpectedException;
 
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.group.Group;
 import seedu.address.testutil.AddressBookBuilder;
 import seedu.address.testutil.PersonBuilder;
 
@@ -36,25 +34,25 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void deleteTag_nonExistent_modelUnchanged() throws Exception {
+    public void deleteGroup_nonExistent_modelUnchanged() throws Exception {
         AddressBook addressBook = new AddressBookBuilder().withPerson(BOB).withPerson(AMY).build();
         UserPrefs userPrefs = new UserPrefs();
 
         ModelManager modelManager = new ModelManager(addressBook, userPrefs);
-        modelManager.removeTag(new Tag(VALID_TAG_UNUSED));
+        modelManager.removeGroup(new Group(VALID_GROUP_UNUSED));
         assertEquals(new ModelManager(addressBook, userPrefs), modelManager);
     }
 
     @Test
-    public void deleteTag_tagUsedByMultiplePersons_tagRemoved() throws Exception {
+    public void deleteGroup_groupUsedByMultiplePersons_groupRemoved() throws Exception {
         AddressBook addressBook = new AddressBookBuilder().withPerson(BOB).withPerson(AMY).build();
         UserPrefs userPrefs = new UserPrefs();
 
         ModelManager modelManager = new ModelManager(addressBook, userPrefs);
-        modelManager.removeTag(new Tag(VALID_TAG_FRIEND));
+        modelManager.removeGroup(new Group(VALID_GROUP_CS1010));
 
-        Person expectedAmy = new PersonBuilder(AMY).withTags().build();
-        Person expectedBob = new PersonBuilder(BOB).withTags(VALID_TAG_HUSBAND).build();
+        Person expectedAmy = new PersonBuilder(AMY).withGroups().build();
+        Person expectedBob = new PersonBuilder(BOB).withGroups(VALID_GROUP_CS2010).build();
         AddressBook expecetedAddressBook = new AddressBookBuilder()
                 .withPerson(expectedBob).withPerson(expectedAmy).build();
 

@@ -8,7 +8,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DETAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUP;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TIMETABLE_LINK;
 
 import java.util.ArrayList;
@@ -43,10 +43,10 @@ public class CommandTestUtil {
     public static final String VALID_TIMETABLE_LINK_BOB = "http://modsn.us/d8zfG";
     public static final String VALID_DETAIL_AMY = "Likes boy";
     public static final String VALID_DETAIL_BOB = "Likes girl";
-    public static final String VALID_TAG_HUSBAND = "husband";
-    public static final String VALID_TAG_FRIEND = "friends";
-    public static final String VALID_TAG_COLOR_RED = "red";
-    public static final String VALID_TAG_UNUSED = "UNUSED"; //for testing only, do not use to build person
+    public static final String VALID_GROUP_CS2010 = "CS2010";
+    public static final String VALID_GROUP_CS1010 = "CS1010";
+    public static final String VALID_GROUP_COLOR_RED = "red";
+    public static final String VALID_GROUP_UNUSED = "UNUSED"; //for testing only, do not use to build person
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
@@ -60,8 +60,8 @@ public class CommandTestUtil {
     public static final String TIMETABLE_LINK_DESC_BOB = " " + PREFIX_TIMETABLE_LINK + VALID_TIMETABLE_LINK_BOB;
     public static final String DETAIL_DESC_AMY = " " + PREFIX_DETAIL + VALID_DETAIL_AMY;
     public static final String DETAIL_DESC_BOB = " " + PREFIX_DETAIL + VALID_DETAIL_BOB;
-    public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
-    public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
+    public static final String GROUP_DESC_CS1010 = " " + PREFIX_GROUP + VALID_GROUP_CS1010;
+    public static final String GROUP_DESC_CS2010 = " " + PREFIX_GROUP + VALID_GROUP_CS2010;
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
@@ -71,8 +71,8 @@ public class CommandTestUtil {
             + "https:modn.us/aoubo"; //URL head not correct
     public static final String INVALID_DETAIL_DESC = " " + PREFIX_DETAIL
             + "Likes &"; //'&' not allowed in detail
-    public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
-    public static final String INVALID_TAG_COLOR = " rainbow"; // doesn't support
+    public static final String INVALID_GROUP_DESC = " " + PREFIX_GROUP + "cs1010*"; // '*' not allowed in groups
+    public static final String INVALID_GROUP_COLOR = " rainbow"; // doesn't support
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
@@ -83,10 +83,10 @@ public class CommandTestUtil {
     static {
         DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
                 .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
-                .withTags(VALID_TAG_FRIEND).build();
+                .withGroups(VALID_GROUP_CS1010).build();
         DESC_BOB = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
-                .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
+                .withGroups(VALID_GROUP_CS2010, VALID_GROUP_CS1010).build();
     }
 
     /**

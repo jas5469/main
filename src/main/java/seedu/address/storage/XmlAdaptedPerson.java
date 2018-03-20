@@ -16,7 +16,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.TimeTableLink;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.group.Group;
 
 /**
  * JAXB-friendly version of the Person.
@@ -39,7 +39,7 @@ public class XmlAdaptedPerson {
     private String detail;
 
     @XmlElement
-    private List<XmlAdaptedTag> tagged = new ArrayList<>();
+    private List<XmlAdaptedGroup> grouped = new ArrayList<>();
 
     /**
      * Constructs an XmlAdaptedPerson.
@@ -51,15 +51,15 @@ public class XmlAdaptedPerson {
      * Constructs an {@code XmlAdaptedPerson} with the given person details.
      */
     public XmlAdaptedPerson(String name, String phone, String email, String address,
-                            String link, String detail, List<XmlAdaptedTag> tagged) {
+                            String link, String detail, List<XmlAdaptedGroup> grouped) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.link = link;
         this.detail = detail;
-        if (tagged != null) {
-            this.tagged = new ArrayList<>(tagged);
+        if (grouped != null) {
+            this.grouped = new ArrayList<>(grouped);
         }
     }
 
@@ -75,9 +75,9 @@ public class XmlAdaptedPerson {
         address = source.getAddress().value;
         link = source.getTimeTableLink().value;
         detail = source.getDetail().detail;
-        tagged = new ArrayList<>();
-        for (Tag tag : source.getTags()) {
-            tagged.add(new XmlAdaptedTag(tag));
+        grouped = new ArrayList<>();
+        for (Group group : source.getGroups()) {
+            grouped.add(new XmlAdaptedGroup(group));
         }
     }
 
@@ -87,9 +87,9 @@ public class XmlAdaptedPerson {
      * @throws IllegalValueException if there were any data constraints violated in the adapted person
      */
     public Person toModelType() throws IllegalValueException {
-        final List<Tag> personTags = new ArrayList<>();
-        for (XmlAdaptedTag tag : tagged) {
-            personTags.add(tag.toModelType());
+        final List<Group> personGroups = new ArrayList<>();
+        for (XmlAdaptedGroup group : grouped) {
+            personGroups.add(group.toModelType());
         }
 
         if (this.name == null) {
@@ -142,8 +142,8 @@ public class XmlAdaptedPerson {
         }
         final Detail detail = new Detail(this.detail);
 
-        final Set<Tag> tags = new HashSet<>(personTags);
-        return new Person(name, phone, email, address, link, detail, tags);
+        final Set<Group> groups = new HashSet<>(personGroups);
+        return new Person(name, phone, email, address, link, detail, groups);
     }
 
     @Override
@@ -163,6 +163,6 @@ public class XmlAdaptedPerson {
                 && Objects.equals(address, otherPerson.address)
                 && Objects.equals(link, otherPerson.link)
                 && Objects.equals(detail, otherPerson.detail)
-                && tagged.equals(otherPerson.tagged);
+                && grouped.equals(otherPerson.grouped);
     }
 }

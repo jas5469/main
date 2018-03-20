@@ -6,7 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DETAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUP;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TIMETABLE_LINK;
 
 import java.util.Set;
@@ -22,7 +22,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.TimeTableLink;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.group.Group;
 
 /**
  * Parses input arguments and creates a new AddCommand object
@@ -37,7 +37,7 @@ public class AddCommandParser implements Parser<AddCommand> {
     public AddCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
-                        PREFIX_TIMETABLE_LINK, PREFIX_DETAIL, PREFIX_TAG);
+                        PREFIX_TIMETABLE_LINK, PREFIX_DETAIL, PREFIX_GROUP);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ADDRESS, PREFIX_PHONE, PREFIX_EMAIL,
                 PREFIX_TIMETABLE_LINK, PREFIX_DETAIL)
@@ -52,9 +52,9 @@ public class AddCommandParser implements Parser<AddCommand> {
             Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS)).get();
             TimeTableLink link = ParserUtil.parseTimeTableLink(argMultimap.getValue(PREFIX_TIMETABLE_LINK)).get();
             Detail detail = ParserUtil.parseDetail(argMultimap.getValue(PREFIX_DETAIL)).get();
-            Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
+            Set<Group> groupList = ParserUtil.parseGroups(argMultimap.getAllValues(PREFIX_GROUP));
 
-            Person person = new Person(name, phone, email, address, link, detail, tagList);
+            Person person = new Person(name, phone, email, address, link, detail, groupList);
 
             return new AddCommand(person);
         } catch (IllegalValueException ive) {
