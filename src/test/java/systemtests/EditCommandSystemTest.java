@@ -100,7 +100,7 @@ public class EditCommandSystemTest extends AddressBookSystemTest {
         editedPerson = new PersonBuilder(personToEdit).withGroups(VALID_GROUP_CS1010).build();
         assertCommandSuccess(command, index, editedPerson);
 
-        /* Case: clear tags -> cleared */
+        /* Case: clear groups -> cleared */
         index = INDEX_FIRST_PERSON;
         command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + " " + PREFIX_GROUP.getPrefix();
         editedPerson = new PersonBuilder(personToEdit).withGroups().build();
@@ -191,7 +191,7 @@ public class EditCommandSystemTest extends AddressBookSystemTest {
                 + ADDRESS_DESC_BOB + TIMETABLE_LINK_DESC_BOB + DETAIL_DESC_BOB + GROUP_DESC_CS1010 + GROUP_DESC_CS2010;
         assertCommandFailure(command, EditCommand.MESSAGE_DUPLICATE_PERSON);
 
-        /* Case: edit a person with new values same as another person's values but with different tags -> rejected */
+        /* Case: edit a person with new values same as another person's values but with different groups -> rejected */
         command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
                 + ADDRESS_DESC_BOB + TIMETABLE_LINK_DESC_BOB + DETAIL_DESC_BOB + GROUP_DESC_CS2010;
         assertCommandFailure(command, EditCommand.MESSAGE_DUPLICATE_PERSON);
