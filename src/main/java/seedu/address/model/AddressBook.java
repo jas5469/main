@@ -21,6 +21,9 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
+import seedu.address.model.todo.ToDo;
+import seedu.address.model.todo.UniqueToDoList;
+import seedu.address.model.todo.exceptions.DuplicateToDoException;
 
 
 /**
@@ -31,6 +34,8 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniquePersonList persons;
     private final UniqueGroupList groups;
+    private final UniqueToDoList todos;
+
 
     /*
      * The 'unusual' code block below is an non-static initialization block, sometimes used to avoid duplication
@@ -42,6 +47,8 @@ public class AddressBook implements ReadOnlyAddressBook {
     {
         persons = new UniquePersonList();
         groups = new UniqueGroupList();
+        todos = new UniqueToDoList();
+
     }
 
     public AddressBook() {
@@ -65,6 +72,10 @@ public class AddressBook implements ReadOnlyAddressBook {
         this.groups.setGroups(groups);
     }
 
+    public void setToDos(List<ToDo> todos) throws DuplicateToDoException {
+        this.todos.setToDos(todos);
+    }
+
     /**
      * Resets the existing data of this {@code AddressBook} with {@code newData}.
      */
@@ -74,11 +85,15 @@ public class AddressBook implements ReadOnlyAddressBook {
         List<Person> syncedPersonList = newData.getPersonList().stream()
                 .map(this::syncWithMasterGroupList)
                 .collect(Collectors.toList());
+        List<ToDo> syncedToDoList = newData.getToDoList();
 
         try {
             setPersons(syncedPersonList);
+            setToDos(syncedToDoList);
         } catch (DuplicatePersonException e) {
             throw new AssertionError("AddressBooks should not have duplicate persons");
+        } catch (DuplicateToDoException e) {
+            throw new AssertionError("AddressBooks should not have duplicate todos");
         }
     }
 
@@ -155,6 +170,16 @@ public class AddressBook implements ReadOnlyAddressBook {
         }
     }
 
+    //// to-do-level operations
+    /**
+     * Adds a to-do to the address book.
+     *
+     * @throws DuplicateToDoException if an equivalent to-do already exists.
+     */
+    public void addToDo(ToDo todo) throws DuplicateToDoException {
+        todos.add(todo);
+    }
+
     //// group-level operations
 
     public void addGroup(Group t) throws UniqueGroupList.DuplicateGroupException {
@@ -177,6 +202,11 @@ public class AddressBook implements ReadOnlyAddressBook {
     @Override
     public ObservableList<Group> getGroupList() {
         return groups.asObservableList();
+    }
+
+    @Override
+    public ObservableList<ToDo> getToDoList() {
+        return todos.asObservableList();
     }
 
     @Override
