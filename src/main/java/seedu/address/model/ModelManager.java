@@ -75,11 +75,8 @@ public class ModelManager extends ComponentManager implements Model {
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         indicateAddressBookChanged();
     }
-<<<<<<< HEAD
-    @Override
-=======
 
->>>>>>> d95a571d6d62d9dea303c596ade42209f4d6e3a5
+    @Override
     public synchronized void addToDo(ToDo todo) throws DuplicateToDoException {
         addressBook.addToDo(todo);
         indicateAddressBookChanged();
