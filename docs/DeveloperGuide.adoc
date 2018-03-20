@@ -1,4 +1,3 @@
-
 = Fastis-Meetup Manager - Developer Guide
 :toc:
 :toc-title:
