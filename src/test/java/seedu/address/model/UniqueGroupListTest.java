@@ -6,7 +6,6 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_GROUP_COLOR_ORA
 import static seedu.address.logic.commands.CommandTestUtil.VALID_GROUP_CS1010;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_GROUP_CS2010;
 
-
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
