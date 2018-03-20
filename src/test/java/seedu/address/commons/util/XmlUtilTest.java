@@ -41,7 +41,7 @@ public class XmlUtilTest {
     private static final String VALID_ADDRESS = "4th street";
     private static final String VALID_LINK = "http://modsn.us/abcdef";
     private static final String VALID_DETAIL = "Likes tennis";
-    private static final List<XmlAdaptedGroup> VALID_GROUPS = Collections.singletonList(new XmlAdaptedGroup("cs1010"));
+    private static final List<XmlAdaptedGroup> VALID_GROUPS = Collections.singletonList(new XmlAdaptedGroup("CS1010"));
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();

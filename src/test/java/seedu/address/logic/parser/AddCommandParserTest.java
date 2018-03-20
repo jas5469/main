@@ -88,18 +88,18 @@ public class AddCommandParserTest {
                 + ADDRESS_DESC_BOB + TIMETABLE_LINK_DESC_BOB + DETAIL_DESC_BOB + GROUP_DESC_CS1010,
                 new AddCommand(expectedPerson));
 
-        // multiple tags - all accepted
-        Person expectedPersonMultipleTags = new PersonBuilder().withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
+        // multiple groups - all accepted
+        Person expectedPersonMultipleGroups = new PersonBuilder().withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
                 .withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB).withTimeTableLink(VALID_TIMETABLE_LINK_BOB)
                 .withDetail(VALID_DETAIL_BOB).withGroups(VALID_GROUP_CS1010, VALID_GROUP_CS2010).build();
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
                         + TIMETABLE_LINK_DESC_BOB + DETAIL_DESC_BOB + GROUP_DESC_CS2010 + GROUP_DESC_CS1010,
-                new AddCommand(expectedPersonMultipleTags));
+                new AddCommand(expectedPersonMultipleGroups));
     }
 
     @Test
     public void parse_optionalFieldsMissing_success() {
-        // zero tags
+        // zero groups
         Person expectedPerson = new PersonBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
                 .withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY).withTimeTableLink(VALID_TIMETABLE_LINK_AMY)
                 .withDetail(VALID_DETAIL_AMY).withGroups().build();
