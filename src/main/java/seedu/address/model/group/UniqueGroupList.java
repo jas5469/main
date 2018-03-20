@@ -24,7 +24,7 @@ public class UniqueGroupList implements Iterable<Group> {
     private final ObservableList<Group> internalList = FXCollections.observableArrayList();
 
     /**
-     * Constructs empty TagList.
+     * Constructs empty GroupList.
      */
     public UniqueGroupList() {}
 
@@ -40,7 +40,7 @@ public class UniqueGroupList implements Iterable<Group> {
     }
 
     /**
-     * Returns all tags in this list as a Set.
+     * Returns all groups in this list as a Set.
      * This set is mutable and change-insulated against the internal list.
      */
     public Set<Group> toSet() {
@@ -49,7 +49,7 @@ public class UniqueGroupList implements Iterable<Group> {
     }
 
     /**
-     * Replaces the Tags in this list with those in the argument group list.
+     * Replaces the Groups in this list with those in the argument group list.
      */
     public void setGroups(Set<Group> groups) {
         requireAllNonNull(groups);
@@ -63,7 +63,7 @@ public class UniqueGroupList implements Iterable<Group> {
     public void mergeFrom(UniqueGroupList from) {
         final Set<Group> alreadyInside = this.toSet();
         from.internalList.stream()
-                .filter(tag -> !alreadyInside.contains(tag))
+                .filter(group -> !alreadyInside.contains(group))
                 .forEach(internalList::add);
 
         assert CollectionUtil.elementsAreUnique(internalList);
