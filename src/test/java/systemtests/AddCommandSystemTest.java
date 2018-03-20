@@ -7,6 +7,8 @@ import static seedu.address.logic.commands.CommandTestUtil.DETAIL_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.DETAIL_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.GROUP_DESC_CS1010;
+import static seedu.address.logic.commands.CommandTestUtil.GROUP_DESC_CS2010;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_ADDRESS_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_DETAIL_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
@@ -18,8 +20,6 @@ import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.GROUP_DESC_CS1010;
-import static seedu.address.logic.commands.CommandTestUtil.GROUP_DESC_CS2010;
 import static seedu.address.logic.commands.CommandTestUtil.TIMETABLE_LINK_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.TIMETABLE_LINK_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_AMY;
@@ -28,11 +28,11 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_DETAIL_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DETAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_GROUP_CS1010;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_GROUP_CS1010;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TIMETABLE_LINK_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TIMETABLE_LINK_BOB;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUP;
@@ -52,6 +52,7 @@ import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.model.Model;
+import seedu.address.model.group.Group;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Detail;
 import seedu.address.model.person.Email;
@@ -60,7 +61,6 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.TimeTableLink;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
-import seedu.address.model.group.Group;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
 
@@ -72,7 +72,8 @@ public class AddCommandSystemTest extends AddressBookSystemTest {
 
         /* ------------------------ Perform add operations on the shown unfiltered list ----------------------------- */
 
-        /* Case: add a person without groups to a non-empty address book, command with leading spaces and trailing spaces
+        /* Case: add a person without groups to a non-empty address book, command with leading spaces and
+        trailing spaces
          * -> added
          */
         Person toAdd = AMY;

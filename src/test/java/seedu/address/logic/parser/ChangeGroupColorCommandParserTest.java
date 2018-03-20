@@ -49,6 +49,6 @@ public class ChangeGroupColorCommandParserTest {
     public void parse_validValue_success() {
         // unsupported color specified
         assertParseSuccess(parser, VALID_GROUP_CS1010 + " " + VALID_GROUP_COLOR_RED,
-                new ChangeGroupColorCommand(VALID_GROUP_CS1010,VALID_GROUP_COLOR_RED));
+                new ChangeGroupColorCommand(VALID_GROUP_CS1010, VALID_GROUP_COLOR_RED));
     }
 }

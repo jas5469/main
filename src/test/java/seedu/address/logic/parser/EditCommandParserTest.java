@@ -5,6 +5,8 @@ import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.GROUP_DESC_CS1010;
+import static seedu.address.logic.commands.CommandTestUtil.GROUP_DESC_CS2010;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_ADDRESS_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
@@ -13,17 +15,15 @@ import static seedu.address.logic.commands.CommandTestUtil.INVALID_GROUP_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.GROUP_DESC_CS1010;
-import static seedu.address.logic.commands.CommandTestUtil.GROUP_DESC_CS2010;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_GROUP_CS1010;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_GROUP_CS2010;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_GROUP_CS1010;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_GROUP_CS2010;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUP;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
@@ -36,11 +36,11 @@ import org.junit.Test;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
+import seedu.address.model.group.Group;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
-import seedu.address.model.group.Group;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 
 public class EditCommandParserTest {
@@ -96,12 +96,16 @@ public class EditCommandParserTest {
 
         // while parsing {@code PREFIX_GROUP} alone will reset the groups of the {@code Person} being edited,
         // parsing it together with a valid group results in error
-        assertParseFailure(parser, "1" + GROUP_DESC_CS1010 + GROUP_DESC_CS2010 + GROUP_EMPTY, Group.MESSAGE_GROUP_CONSTRAINTS);
-        assertParseFailure(parser, "1" + GROUP_DESC_CS1010  + GROUP_EMPTY + GROUP_DESC_CS2010, Group.MESSAGE_GROUP_CONSTRAINTS);
-        assertParseFailure(parser, "1" + GROUP_EMPTY + GROUP_DESC_CS1010 + GROUP_DESC_CS2010, Group.MESSAGE_GROUP_CONSTRAINTS);
+        assertParseFailure(parser, "1" + GROUP_DESC_CS1010 + GROUP_DESC_CS2010 + GROUP_EMPTY,
+                Group.MESSAGE_GROUP_CONSTRAINTS);
+        assertParseFailure(parser, "1" + GROUP_DESC_CS1010  + GROUP_EMPTY + GROUP_DESC_CS2010,
+                Group.MESSAGE_GROUP_CONSTRAINTS);
+        assertParseFailure(parser, "1" + GROUP_EMPTY + GROUP_DESC_CS1010 + GROUP_DESC_CS2010,
+                Group.MESSAGE_GROUP_CONSTRAINTS);
 
         // multiple invalid values, but only the first invalid value is captured
-        assertParseFailure(parser, "1" + INVALID_NAME_DESC + INVALID_EMAIL_DESC + VALID_ADDRESS_AMY + VALID_PHONE_AMY,
+        assertParseFailure(parser, "1" + INVALID_NAME_DESC + INVALID_EMAIL_DESC + VALID_ADDRESS_AMY +
+                        VALID_PHONE_AMY,
                 Name.MESSAGE_NAME_CONSTRAINTS);
     }
 
@@ -173,7 +177,8 @@ public class EditCommandParserTest {
                 + PHONE_DESC_BOB + ADDRESS_DESC_BOB + EMAIL_DESC_BOB + GROUP_DESC_CS2010;
 
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withPhone(VALID_PHONE_BOB)
-                .withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB).withGroups(VALID_GROUP_CS1010, VALID_GROUP_CS2010)
+                .withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB).withGroups(VALID_GROUP_CS1010,
+                        VALID_GROUP_CS2010)
                 .build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 

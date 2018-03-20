@@ -6,11 +6,11 @@ import java.util.Set;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Detail;
 import seedu.address.model.person.Email;
+import seedu.address.model.group.Group;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.TimeTableLink;
-import seedu.address.model.group.Group;
 import seedu.address.model.util.SampleDataUtil;
 
 /**

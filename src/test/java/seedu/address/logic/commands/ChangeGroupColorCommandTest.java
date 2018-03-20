@@ -15,8 +15,8 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.person.Person;
 import seedu.address.model.group.Group;
+import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
 
 /**
@@ -32,7 +32,8 @@ public class ChangeGroupColorCommandTest {
         ChangeGroupColorCommand command = prepareCommand(VALID_GROUP_CS1010, VALID_GROUP_COLOR_RED);
 
         String expectedMessage =
-                String.format(ChangeGroupColorCommand.MESSAGE_EDIT_GROUP_SUCCESS, VALID_GROUP_CS1010, VALID_GROUP_COLOR_RED);
+                String.format(ChangeGroupColorCommand.MESSAGE_EDIT_GROUP_SUCCESS, VALID_GROUP_CS1010,
+                        VALID_GROUP_COLOR_RED);
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         Group oldGroup = new Group(VALID_GROUP_CS1010);

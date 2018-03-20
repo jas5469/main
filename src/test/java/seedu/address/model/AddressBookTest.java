@@ -1,7 +1,9 @@
 package seedu.address.model;
 
 import static org.junit.Assert.assertEquals;
-import static seedu.address.logic.commands.CommandTestUtil.*;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_GROUP_CS2010;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_GROUP_CS1010;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_GROUP_UNUSED;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.AMY;
 import static seedu.address.testutil.TypicalPersons.BOB;

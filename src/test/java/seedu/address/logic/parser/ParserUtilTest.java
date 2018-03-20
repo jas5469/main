@@ -17,11 +17,11 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.group.Group;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
-import seedu.address.model.group.Group;
 import seedu.address.testutil.Assert;
 
 public class ParserUtilTest {
@@ -238,7 +238,8 @@ public class ParserUtilTest {
     @Test
     public void parseGroups_collectionWithValidGroups_returnsGroupSet() throws Exception {
         Set<Group> actualGroupSet = ParserUtil.parseGroups(Arrays.asList(VALID_GROUP_1, VALID_GROUP_2));
-        Set<Group> expectedGroupSet = new HashSet<Group>(Arrays.asList(new Group(VALID_GROUP_1), new Group(VALID_GROUP_2)));
+        Set<Group> expectedGroupSet = new HashSet<Group>(Arrays.asList(new Group(VALID_GROUP_1),
+                new Group(VALID_GROUP_2)));
 
         assertEquals(expectedGroupSet, actualGroupSet);
     }
