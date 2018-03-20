@@ -76,7 +76,7 @@ public class XmlSerializableAddressBook {
         }
 
         XmlSerializableAddressBook otherAb = (XmlSerializableAddressBook) other;
-        return persons.equals(otherAb.persons) && groups.equals(otherAb.groups)&& todos.equals(otherAb.todos);
+        return persons.equals(otherAb.persons) && groups.equals(otherAb.groups) && todos.equals(otherAb.todos);
 
 
     }
