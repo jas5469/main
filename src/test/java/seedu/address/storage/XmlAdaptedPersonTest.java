@@ -12,6 +12,7 @@ import java.util.stream.Collectors;
 import org.junit.Test;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.group.Group;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Detail;
 import seedu.address.model.person.Email;
@@ -19,11 +20,14 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.TimeTableLink;
 <<<<<<< HEAD
+<<<<<<< HEAD
 import seedu.address.model.group.Group;
 
 =======
 import seedu.address.model.tag.Tag;
 >>>>>>> 68bb5e35a434c3f77b8d012a36ac30e08d4215b5
+=======
+>>>>>>> d95a571d6d62d9dea303c596ade42209f4d6e3a5
 import seedu.address.testutil.Assert;
 
 public class XmlAdaptedPersonTest {

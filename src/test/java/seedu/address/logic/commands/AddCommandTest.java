@@ -26,6 +26,11 @@ import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
+<<<<<<< HEAD
+=======
+import seedu.address.model.group.Group;
+import seedu.address.model.group.GroupNotFoundException;
+>>>>>>> d95a571d6d62d9dea303c596ade42209f4d6e3a5
 import seedu.address.model.todo.ToDo;
 import seedu.address.model.todo.exceptions.DuplicateToDoException;
 import seedu.address.testutil.PersonBuilder;
@@ -105,13 +110,21 @@ public class AddCommandTest {
             fail("This method should not be called.");
         }
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> d95a571d6d62d9dea303c596ade42209f4d6e3a5
         public void addToDo(ToDo todo) throws DuplicateToDoException {
             fail("This method should not be called.");
         }
 
         @Override
+<<<<<<< HEAD
             public void updateGroup(Group target, Group editedGroup) throws GroupNotFoundException {
+=======
+        public void updateGroup(Group target, Group editedGroup) throws GroupNotFoundException {
+            
+>>>>>>> d95a571d6d62d9dea303c596ade42209f4d6e3a5
             fail("This method should not be called.");
         }
 

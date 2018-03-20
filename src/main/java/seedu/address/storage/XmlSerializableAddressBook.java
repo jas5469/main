@@ -20,6 +20,10 @@ public class XmlSerializableAddressBook {
     @XmlElement
     private List<XmlAdaptedPerson> persons;
     @XmlElement
+<<<<<<< HEAD
+=======
+
+>>>>>>> d95a571d6d62d9dea303c596ade42209f4d6e3a5
     private List<XmlAdaptedGroup> groups;
     @XmlElement
     private List<XmlAdaptedToDo> todos;
@@ -32,6 +36,10 @@ public class XmlSerializableAddressBook {
         persons = new ArrayList<>();
         groups = new ArrayList<>();
         todos = new ArrayList<>();
+<<<<<<< HEAD
+=======
+
+>>>>>>> d95a571d6d62d9dea303c596ade42209f4d6e3a5
     }
 
     /**
@@ -42,6 +50,10 @@ public class XmlSerializableAddressBook {
         persons.addAll(src.getPersonList().stream().map(XmlAdaptedPerson::new).collect(Collectors.toList()));
         groups.addAll(src.getGroupList().stream().map(XmlAdaptedGroup::new).collect(Collectors.toList()));
         todos.addAll(src.getToDoList().stream().map(XmlAdaptedToDo::new).collect(Collectors.toList()));
+<<<<<<< HEAD
+=======
+
+>>>>>>> d95a571d6d62d9dea303c596ade42209f4d6e3a5
     }
 
     /**
@@ -62,6 +74,10 @@ public class XmlSerializableAddressBook {
             addressBook.addToDo(todo.toModelType());
         }
         addressBook.addColorsToGroup();
+<<<<<<< HEAD
+=======
+
+>>>>>>> d95a571d6d62d9dea303c596ade42209f4d6e3a5
         return addressBook;
     }
 
@@ -76,6 +92,11 @@ public class XmlSerializableAddressBook {
         }
 
         XmlSerializableAddressBook otherAb = (XmlSerializableAddressBook) other;
+<<<<<<< HEAD
         return persons.equals(otherAb.persons) && groups.equals(otherAb.groups) && todos.equals(otherAb.todos);
+=======
+        return persons.equals(otherAb.persons) && groups.equals(otherAb.groups)&& todos.equals(otherAb.todos);
+
+>>>>>>> d95a571d6d62d9dea303c596ade42209f4d6e3a5
     }
 }
