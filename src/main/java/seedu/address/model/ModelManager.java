@@ -88,10 +88,6 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void updateGroup(Group target, Group editedGroup) throws GroupNotFoundException {
         addressBook.editGroups(target, editedGroup);
-<<<<<<< HEAD
-=======
-
->>>>>>> d95a571d6d62d9dea303c596ade42209f4d6e3a5
         indicateAddressBookChanged();
     }
 

@@ -187,12 +187,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         todos.add(todo);
     }
 
-<<<<<<< HEAD
     //// group-level operations
-=======
-    //// group-level operation
-
->>>>>>> d95a571d6d62d9dea303c596ade42209f4d6e3a5
 
     public void addGroup(Group t) throws UniqueGroupList.DuplicateGroupException {
         groups.add(t);

@@ -22,10 +22,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.group.Group;
 import seedu.address.model.person.Person;
-<<<<<<< HEAD
-=======
-import seedu.address.model.group.Group;
->>>>>>> d95a571d6d62d9dea303c596ade42209f4d6e3a5
 import seedu.address.model.todo.ToDo;
 import seedu.address.testutil.AddressBookBuilder;
 import seedu.address.testutil.PersonBuilder;
@@ -77,10 +73,6 @@ public class AddressBookTest {
         List<Group> newGroups = new ArrayList<>(ALICE.getGroups());
         List<ToDo> newToDos = Arrays.asList(TODO_A, TODO_A);
         AddressBookStub newData = new AddressBookStub(newPersons, newGroups, newToDos);
-<<<<<<< HEAD
-=======
-
->>>>>>> d95a571d6d62d9dea303c596ade42209f4d6e3a5
         thrown.expect(AssertionError.class);
         addressBook.resetData(newData);
     }
@@ -104,14 +96,9 @@ public class AddressBookTest {
     }
 
     @Test
-<<<<<<< HEAD
-        public void removeGroup_removeNonexistentGroup_addressBookUnchanged() throws Exception {
-            amyNBobAddressBook.removeGroup(new Group(VALID_GROUP_UNUSED));
-
-=======
     public void removeGroup_removeNonexistentGroup_addressBookUnchanged() throws Exception {
         amyNBobAddressBook.removeGroup(new Group(VALID_GROUP_UNUSED));
->>>>>>> d95a571d6d62d9dea303c596ade42209f4d6e3a5
+
 
         AddressBook expectedAddressBook = new AddressBookBuilder().withPerson(AMY).withPerson(BOB).build();
 
@@ -137,20 +124,12 @@ public class AddressBookTest {
         private final ObservableList<Person> persons = FXCollections.observableArrayList();
         private final ObservableList<Group> groups = FXCollections.observableArrayList();
         private final ObservableList<ToDo> todos = FXCollections.observableArrayList();
-<<<<<<< HEAD
 
         AddressBookStub(Collection<Person> persons, Collection<? extends Group> groups, Collection<ToDo> todos) {
             this.persons.setAll(persons);
             this.groups.setAll(groups);
             this.todos.setAll(todos);
-=======
 
-        AddressBookStub(Collection<Person> persons, Collection<? extends Groups> groups, Collection<ToDo> todos) {
-            this.persons.setAll(persons);
-            this.tags.setAll(groups);
-            this.todos.setAll(todos);
-
->>>>>>> d95a571d6d62d9dea303c596ade42209f4d6e3a5
         }
 
         @Override

@@ -7,13 +7,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import seedu.address.logic.commands.AddCommand;
-<<<<<<< HEAD
 import seedu.address.logic.commands.ChangeGroupColorCommand;
 import seedu.address.logic.commands.AddToDoCommand;
-=======
-import seedu.address.logic.commands.AddToDoCommand;
-import seedu.address.logic.commands.ChangeGroupColorCommand;
->>>>>>> d95a571d6d62d9dea303c596ade42209f4d6e3a5
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.DeleteCommand;
