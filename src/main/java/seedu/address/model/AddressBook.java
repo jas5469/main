@@ -24,10 +24,7 @@ import seedu.address.model.person.exceptions.PersonNotFoundException;
 import seedu.address.model.todo.ToDo;
 import seedu.address.model.todo.UniqueToDoList;
 import seedu.address.model.todo.exceptions.DuplicateToDoException;
-<<<<<<< HEAD
 
-=======
->>>>>>> d95a571d6d62d9dea303c596ade42209f4d6e3a5
 
 /**
  * Wraps all data at the address-book level
@@ -36,10 +33,6 @@ import seedu.address.model.todo.exceptions.DuplicateToDoException;
 public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniquePersonList persons;
-<<<<<<< HEAD
-=======
-
->>>>>>> d95a571d6d62d9dea303c596ade42209f4d6e3a5
     private final UniqueGroupList groups;
     private final UniqueToDoList todos;
 
