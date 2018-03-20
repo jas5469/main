@@ -18,7 +18,8 @@ public class ChangeGroupColorCommand extends UndoableCommand {
     public static final String COMMAND_WORD = "changeGroupColor";
     public static final String COMMAND_ALIAS = "color";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Changes the current color of the group specified by name"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Changes the current color of the group specified by "
+            + "name"
             + "\nParameters: GROUPNAME (must be an existing group) COLOR\n"
             + "Example: " + COMMAND_WORD + " CS2010 red\n"
             + "Available colors are: teal, red, yellow, blue, orange, brown, green, pink, black, grey";
