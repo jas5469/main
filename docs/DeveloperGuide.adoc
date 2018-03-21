@@ -362,6 +362,7 @@ image::UndoRedoActivityDiagram.png[width="650"]
 === Add ToDo feature
 ==== Current Implementation
 
+
 The add todos mechanism is facilitated by `AddToDoCommand`, which resides inside `Logic` component. It supports adding ToDo objects to the address book. AddToDoCommand inherits from `UndoableCommand`.
 
 Hence, AddToDoCommand can be undone using `UndoRedoStack`.
@@ -398,6 +399,7 @@ The new to-do is added to the `UniqueToDoList` and the current state of the addr
 The following sequence diagram shows how the addToDo operation works:
 
 image::AddToDoSequenceDiagram.png[width="800"]
+
 
 ==== Design Considerations
 
@@ -438,6 +440,25 @@ We are using `java.util.logging` package for logging. The `LogsCenter` class is 
 === Configuration
 
 Certain properties of the application can be controlled (e.g App name, logging level) through the configuration file (default: `config.json`).
+
+//tag::ListGroupMembers[]
+=== ListGroupMembers Feature
+==== Current Implementation
+Fastis uses `ListGroupMembersCommand` ,which resides under `Logic` to facilitate the listing of members under the same
+tag.
+
+Then it stores the list in `UniqueGroupList` , which is under `Model` component.
+
+When user types in command line `ListGroupMembers` , Fastis will use the keyword provided to search for the group tag
+and list out all members under the same tag.
+
+==== Design Considerations
+* **Alternative 1 (current choice):** Add a new abstract method `ListGroupMembersCommand(`
+** Pros: Edit `ListGroupMembersCommand()` easily to suit our needs
+** Cons: Hard for new developers to understand the template pattern.
+* **Alternative 2:** Just override `execute()`
+** Pros: Does not involve the template pattern, easier for new developers to understand.
+** Cons: Classes that inherit from `ListGroupMembersCommand()` must remember to call `super.execute()`
 
 == Documentation
 
