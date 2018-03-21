@@ -6,6 +6,8 @@ import java.util.Collections;
 import java.util.Objects;
 import java.util.Set;
 
+import seedu.address.model.group.Group;
+import seedu.address.model.group.UniqueGroupList;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
 
@@ -23,13 +25,14 @@ public class Person {
     private final Detail detail;
 
     private final UniqueTagList tags;
+    private final UniqueGroupList groups;
 
     /**
      * Every field must be present and not null.
      */
     public Person(Name name, Phone phone, Email email, Address address, TimeTableLink link, Detail detail,
-                  Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, link, detail, tags);
+                  Set<Tag> tags , Set<Group> groups) {
+        requireAllNonNull(name, phone, email, address, link, detail, tags , groups);
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -38,6 +41,7 @@ public class Person {
         this.detail = detail;
         // protect internal tags from changes in the arg list
         this.tags = new UniqueTagList(tags);
+        this.groups = new UniqueGroupList(groups);
     }
 
     public Name getName() {
@@ -70,6 +74,10 @@ public class Person {
      */
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags.toSet());
+    }
+
+    public Set<Group> getGroups() {
+        return Collections.unmodifiableSet(groups.toSet());
     }
 
     @Override
@@ -113,6 +121,8 @@ public class Person {
                 .append(getDetail())
                 .append(" Tags: ");
         getTags().forEach(builder::append);
+        builder.append(" Groups:");
+        getGroups().forEach(builder::append);
         return builder.toString();
     }
 

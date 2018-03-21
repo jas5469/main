@@ -151,7 +151,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         personTags.forEach(tag -> correctTagReferences.add(masterTagObjects.get(tag)));
         return new Person(
                 person.getName(), person.getPhone(), person.getEmail(), person.getAddress(), person.getTimeTableLink(),
-                person.getDetail(), correctTagReferences);
+                person.getDetail(), correctTagReferences, person.getGroups());
     }
 
     /**
@@ -276,7 +276,8 @@ public class AddressBook implements ReadOnlyAddressBook {
         }
         tagList.add(editedTag);
         Person updatedPerson = new Person(person.getName(), person.getPhone(),
-                person.getEmail(), person.getAddress(), person.getTimeTableLink(), person.getDetail(), tagList);
+                person.getEmail(), person.getAddress(), person.getTimeTableLink(), person.getDetail(), tagList,
+                person.getGroups());
 
         try {
             updatePerson(person, updatedPerson);
@@ -300,7 +301,8 @@ public class AddressBook implements ReadOnlyAddressBook {
             return;
         }
         Person updatedPerson = new Person(person.getName(), person.getPhone(),
-                person.getEmail(), person.getAddress(), person.getTimeTableLink(), person.getDetail(), tagList);
+                person.getEmail(), person.getAddress(), person.getTimeTableLink(), person.getDetail(), tagList,
+                person.getGroups());
 
         try {
             updatePerson(person, updatedPerson);

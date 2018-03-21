@@ -3,6 +3,8 @@ package seedu.address.model;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
+import seedu.address.model.group.Group;
+import seedu.address.model.group.GroupNotFoundException;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
@@ -57,5 +59,8 @@ public interface Model {
 
     /** Adds the given to-do */
     void addToDo(ToDo todo) throws DuplicateToDoException;
+
+    /** Removes the given group from addressbook and all persons */
+    void removeGroup(Group group);
 
 }
