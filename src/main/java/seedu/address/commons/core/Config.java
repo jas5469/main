@@ -14,6 +14,7 @@ public class Config {
     private String appTitle = "Address App";
     private Level logLevel = Level.INFO;
     private String userPrefsFilePath = "preferences.json";
+    private String addressBookTheme = "preferences.json";
 
     public String getAppTitle() {
         return appTitle;
@@ -38,7 +39,11 @@ public class Config {
     public void setUserPrefsFilePath(String userPrefsFilePath) {
         this.userPrefsFilePath = userPrefsFilePath;
     }
-
+    //@@author jas5469
+    public String getAddressBookTheme() {
+        return addressBookTheme;
+    }
+    //@@author
     @Override
     public boolean equals(Object other) {
         if (other == this) {
