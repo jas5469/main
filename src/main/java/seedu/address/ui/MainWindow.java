@@ -18,6 +18,7 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.ui.ExitAppRequestEvent;
 import seedu.address.commons.events.ui.ShowHelpRequestEvent;
+import seedu.address.commons.events.ui.SwitchThemeEvent;
 import seedu.address.logic.Logic;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.event.WeeklyEvent;
@@ -29,6 +30,10 @@ import seedu.address.model.event.WeeklyEvent;
 public class MainWindow extends UiPart<Stage> {
 
     private static final String FXML = "MainWindow.fxml";
+    private static final String darkTheme = "/css/DarkTheme.css";
+    private static final String brightTheme = "/css/BrightTheme.css";
+    private static final String darkExtension = "/css/Extensions.css";
+    private static final String brightExtension = "/css/ExtensionsBright.css";
 
     private final Logger logger = LogsCenter.getLogger(this.getClass());
 
@@ -77,6 +82,7 @@ public class MainWindow extends UiPart<Stage> {
         // Configure the UI
         setTitle(config.getAppTitle());
         setWindowDefaultSize(prefs);
+        initializeThemes();
 
         setAccelerators();
         registerAsAnEventHandler(this);
@@ -194,6 +200,45 @@ public class MainWindow extends UiPart<Stage> {
                 (int) primaryStage.getX(), (int) primaryStage.getY());
     }
 
+    //@@author jas5469
+
+    /**
+     * Initializes theme upon start up according to preferences.json file (last saved)
+     */
+    private void initializeThemes() {
+        getRoot().getScene().getStylesheets().clear();
+        if (prefs.getAddressBookTheme().equals(darkTheme)) {
+            getRoot().getScene().getStylesheets().add(darkTheme);
+            getRoot().getScene().getStylesheets().add(darkExtension);
+            prefs.setAddressBookTheme(darkTheme);
+        } else {
+            getRoot().getScene().getStylesheets().add(brightTheme);
+            getRoot().getScene().getStylesheets().add(brightExtension);
+            prefs.setAddressBookTheme(brightTheme);
+        }
+    }
+
+    /**
+     * Handles the event for theme changing
+     * @param event
+     */
+    @Subscribe
+    private void handleThemeChanged(SwitchThemeEvent event) {
+        if (prefs.getAddressBookTheme() == darkTheme) {
+            getRoot().getScene().getStylesheets().clear();
+            getRoot().getScene().getStylesheets().add(brightTheme);
+            getRoot().getScene().getStylesheets().add(brightExtension);
+            prefs.setAddressBookTheme(brightTheme);
+        } else {
+            getRoot().getScene().getStylesheets().clear();
+            getRoot().getScene().getStylesheets().add(darkTheme);
+            getRoot().getScene().getStylesheets().add(darkExtension);
+            prefs.setAddressBookTheme(darkTheme);
+        }
+
+    }
+
+    //@@author
     /**
      * Opens the help window.
      */

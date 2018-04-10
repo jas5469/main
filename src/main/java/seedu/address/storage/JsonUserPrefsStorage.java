@@ -13,6 +13,14 @@ import seedu.address.model.UserPrefs;
 public class JsonUserPrefsStorage implements UserPrefsStorage {
 
     private String filePath;
+    //@@author jas5469
+    private String addressBookTheme;
+
+    public JsonUserPrefsStorage(String filePath, String theme) {
+        this.filePath = filePath;
+        this.addressBookTheme = theme;
+    }
+    //@@author
 
     public JsonUserPrefsStorage(String filePath) {
         this.filePath = filePath;
@@ -21,6 +29,11 @@ public class JsonUserPrefsStorage implements UserPrefsStorage {
     @Override
     public String getUserPrefsFilePath() {
         return filePath;
+    }
+
+    @Override
+    public String getAddressBookTheme() {
+        return addressBookTheme;
     }
 
     @Override

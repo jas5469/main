@@ -2,6 +2,7 @@ package seedu.address.model;
 
 import java.util.Objects;
 
+import javafx.beans.property.ObjectProperty;
 import seedu.address.commons.core.GuiSettings;
 
 /**
@@ -12,9 +13,11 @@ public class UserPrefs {
     private GuiSettings guiSettings;
     private String addressBookFilePath = "data/addressbook.xml";
     private String addressBookName = "MyAddressBook";
+    private String addressBookTheme = "/css/DarkTheme.css";
 
     public UserPrefs() {
         this.setGuiSettings(500, 500, 0, 0);
+        this.setAddressBookTheme(addressBookTheme);
     }
 
     public GuiSettings getGuiSettings() {
@@ -45,6 +48,13 @@ public class UserPrefs {
         this.addressBookName = addressBookName;
     }
 
+    public String getAddressBookTheme() {
+        return addressBookTheme;
+    }
+    public void setAddressBookTheme(String theme) {
+        this.addressBookTheme = theme;
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -58,12 +68,13 @@ public class UserPrefs {
 
         return Objects.equals(guiSettings, o.guiSettings)
                 && Objects.equals(addressBookFilePath, o.addressBookFilePath)
-                && Objects.equals(addressBookName, o.addressBookName);
+                && Objects.equals(addressBookName, o.addressBookName)
+                && Objects.equals(addressBookTheme, o.addressBookTheme);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(guiSettings, addressBookFilePath, addressBookName);
+        return Objects.hash(guiSettings, addressBookFilePath, addressBookName, addressBookTheme);
     }
 
     @Override

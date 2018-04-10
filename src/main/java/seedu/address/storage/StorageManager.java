@@ -48,6 +48,13 @@ public class StorageManager extends ComponentManager implements Storage {
         userPrefsStorage.saveUserPrefs(userPrefs);
     }
 
+    @Override
+    public String getAddressBookTheme() {
+        return userPrefsStorage.getAddressBookTheme();
+    }
+
+
+
 
     // ================ AddressBook methods ==============================
 

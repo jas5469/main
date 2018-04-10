@@ -16,6 +16,17 @@ public interface UserPrefsStorage {
      */
     String getUserPrefsFilePath();
 
+    //@@author jas5469
+
+    /**
+     * Returns address book theme
+     */
+    String getAddressBookTheme();
+
+    //@@author
+
+
+
     /**
      * Returns UserPrefs data from storage.
      *   Returns {@code Optional.empty()} if storage file is not found.
